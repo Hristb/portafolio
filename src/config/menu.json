@@ -2,29 +2,29 @@
   "main": [
     {
       "name": "Inicio",
-      "url": "/AstroBlogWeb"
+      "url": "/"
     },
     {
       "name": "Sobre Mí",
-      "url": "/AstroBlogWeb/about"
+      "url": "/about"
     },
     {
       "name": "Proyectos",
-      "url": "/AstroBlogWeb/blog"
+      "url": "/blog"
     },
     {
       "name": "Contact",
-      "url": "/AstroBlogWeb/contact"
+      "url": "/contact"
     }
   ],
   "footer": [
     {
       "name": "Elements",
-      "url": "/AstroBlogWeb/elements"
+      "url": "/elements"
     },
     {
       "name": "Privacy Policy",
-      "url": "/AstroBlogWeb/privacy-policy"
+      "url": "/privacy-policy"
     }
   ]
 }

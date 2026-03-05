@@ -1,8 +1,8 @@
 {
   "site": {
     "title": "Hristb",
-    "base_url": "https://Hristb.github.io",
-    "base_path": "/AstroBlogWeb",
+    "base_url": "https://hristbartra.com",
+    "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
     "logo": "/images/logo.png",

@@ -11,6 +11,7 @@ const {
   logo_height,
   logo_text,
   title,
+  base_path,
 }: {
   logo: string;
   logo_darkmode: string;
@@ -18,12 +19,14 @@ const {
   logo_height: any;
   logo_text: string;
   title: string;
+  base_path: string;
 } = config.site;
 
 const { theme_switcher }: { theme_switcher: boolean } = config.settings;
+const basePath = base_path || "/";
 ---
 
-<a href="/AstroBlogWeb" class="navbar-brand inline-block">
+<a href={basePath} class="navbar-brand inline-block">
   {
     src || srcDarkmode || logo || logo_darkmode ? (
       <>

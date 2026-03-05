@@ -9,10 +9,13 @@ import remarkToc from "remark-toc";
 import sharp from "sharp";
 import config from "./src/config/config.json";
 
+const siteBaseUrl = config.site.base_url ?? "https://Hristb.github.io";
+const siteBasePath = config.site.base_path ?? "/";
+
 // https://astro.build/config
 export default defineConfig({
-  site: config.site.base_url ? config.site.base_url : "https://Hristb.github.io",
-  base: config.site.base_path ? config.site.base_path : "/AstroBlogWeb",
+  site: siteBaseUrl,
+  base: siteBasePath,
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   image: { service: sharp() },
   vite: { plugins: [tailwindcss()] },
