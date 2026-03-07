@@ -1,52 +1,54 @@
 ---
 # Banner
 banner:
-  title: "Explora Mi Mundo de Desarrollo y Creatividad"
-  content: "Bienvenido a mi espacio personal. Aquí comparto mi trayectoria, proyectos y aprendizajes en el mundo del desarrollo web y la tecnología. Descubre mis creaciones y únete a mi viaje."
+  title: "Senior Backend Engineer | FinTech & Neobanking"
+  content: "Desarrollador de software con más de 6 años de experiencia, especializado en Java, Quarkus, Spring Boot y arquitecturas de microservicios bajo estándares BIAN. Construyendo el futuro del sector financiero digital."
   image: "/images/banner.png"
   button:
     enable: true
-    label: "Ver Mis Proyectos"
-    link: "https://github.com/zeon-studio/astroplate"
+    label: "Ver Mi LinkedIn"
+    link: "https://www.linkedin.com/in/hrist-joy-bartra-saavedra-09b71913a/"
 
 # Features
 features:
-  - title: "🚀 ¿Qué Encontrarás Aquí?"
+  - title: "🏦 Experiencia en FinTech & Neobanking"
     image: "/images/service-1.png"
-    content: "📌 Este espacio es más que una simple página personal. Es un reflejo de mi trayectoria y creaciones. Aquí podrás explorar:"
+    content: "Actualmente en Indra liderando integraciones de core bancario con canales digitales para un Neobanco (Banco por WhatsApp):"
     bulletpoints:
-      - "**Mi Historia** – Mi camino en el desarrollo y la tecnología."
-      - "**Proyectos Destacados** – Aplicaciones y soluciones innovadoras."
-      - "**Tecnologías** – Herramientas que uso, como Angular, TypeScript y Spring Boot."
-      - "**Blog & Recursos** – Consejos, aprendizajes y experiencias en desarrollo."
-      - "**Código Abierto** – Repositorios y herramientas para la comunidad."
-    button:
-      enable: false
-      label: "Get Started Now"
-      link: "#"
-
-  - title: "🌟 Habilidades y Tecnologías"
-    image: "/images/service-2.png"
-    content: "💡 Trabajo con herramientas modernas para desarrollar soluciones escalables y optimizadas:"
-    bulletpoints:
-      - "**Frontend:** Angular, TypeScript, SCSS, TailwindCSS y metodologías como BEM."
-      - "**Backend & Microservicios:** Java, Spring Boot, APIs REST, MySQL, Oracle, SQL y MongoDB."
-      - "**Cloud & DevOps:** Microsoft Azure, Docker, Kubernetes, CI/CD con Azure DevOps y GitHub Actions."
-    button:
-      enable: true
-      label: "🚀 Explora Mis Proyectos"
-      link: "https://github.com/zeon-studio/astroplate"
-
-  - title: "🔥 ¿Por Qué Elegirme Para Tu Proyecto?"
-    image: "/images/service-3.png"
-    content: "Cada desarrollo que realizo no es solo código, sino una solución optimizada, escalable y bien diseñada."
-    bulletpoints:
-      - "**Arquitectura Full Stack:** Desarrollo robusto con Angular, TypeScript, Java y Spring Boot."
-      - "**Optimización & UX:** Lazy loading, SSR/SSG y rendimiento mejorado."
-      - "**Código Mantenible:** Principios SOLID, Clean Code, BEM y TailwindCSS."
-      - "**Escalabilidad & Seguridad:** Arquitecturas desacopladas, OAuth2, JWT y cloud computing."
+      - "**Arquitectura BIAN:** APIs robustas bajo estándares bancarios internacionales."
+      - "**Interoperabilidad de Billeteras:** Afiliación/desafiliación (Yape/Mibanco) y transferencias por número de celular."
+      - "**Microservicios con Quarkus:** Pagos entre tarjetas y transferencias interbancarias con Java 17."
+      - "**Azure Data Factory:** Ingesta de datos para flujos de reenganche y automatización en WhatsApp."
+      - "**GitHub Copilot:** Aceleración del ciclo de desarrollo y documentación técnica con OpenAPI."
     button:
       enable: false
       label: ""
-      link: ""
+      link: "#"
+
+  - title: "🌟 Stack Tecnológico"
+    image: "/images/service-2.png"
+    content: "Especializado en tecnologías modernas para soluciones financieras de alta disponibilidad:"
+    bulletpoints:
+      - "**Backend:** Java 17, Quarkus, Spring Boot, APIs REST, Microservicios y Arquitectura BIAN."
+      - "**Cloud & DevOps:** Microsoft Azure (ADF, Functions, Personalizer), Docker, Kubernetes, CI/CD con Azure DevOps."
+      - "**Bases de Datos:** MySQL, Oracle, SQL y MongoDB."
+      - "**Frontend:** Angular, TypeScript, SCSS y TailwindCSS."
+      - "**Seguridad:** Spring Security, OAuth2, JWT y autenticación basada en tokens."
+    button:
+      enable: false
+      label: ""
+      link: "#"
+
+  - title: "💼 Trayectoria Profesional"
+    image: "/images/service-3.png"
+    content: "Más de 6 años construyendo soluciones en empresas líderes del sector tecnológico y financiero:"
+    bulletpoints:
+      - "**Indra (2023 - Presente):** Senior Backend Engineer — Neobanco & MibancoLab proyectos."
+      - "**Canvia (2022 - 2023):** Analista Programador — Sistema de Perfilamiento de Riesgo (INER)."
+      - "**GLOBAL HITSS (2021 - 2022):** Analista Programador — Sistema SIAC para Claro Perú."
+      - "**REVSA - Grupo Credivargas (2019 - 2021):** Desarrollador — Dashboard KPI y sistemas de gestión."
+    button:
+      enable: true
+      label: "Conoce Más Sobre Mí"
+      link: "/about"
 ---

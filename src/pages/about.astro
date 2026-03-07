@@ -1,12 +1,10 @@
 ---
-import ImageMod from "@/components/ImageMod.astro";
+import SpaceAbout from "@/components/SpaceAbout";
 import Base from "@/layouts/Base.astro";
-import { markdownify } from "@/lib/utils/textConverter";
 import type { CollectionEntry } from "astro:content";
-import { getEntry, render } from "astro:content";
+import { getEntry } from "astro:content";
 
 const about = (await getEntry("about", "-index")) as CollectionEntry<"about">;
-const { Content } = await render(about);
 const { title, description, meta_title, image } = about.data;
 ---
 
@@ -18,26 +16,7 @@ const { title, description, meta_title, image } = about.data;
 >
   <section class="section-sm">
     <div class="container">
-      <div class="row justify-center">
-        <div class="text-center md:col-10 lg:col-7">
-          {
-            image && (
-              <ImageMod
-                class="mx-auto mb-6 rounded-lg"
-                src={image}
-                width={200}
-                height={200}
-                alt={title}
-                format="webp"
-              />
-            )
-          }
-          <h2 set:html={markdownify(title)} class="h3 mb-6" />
-          <div class="content">
-            <Content />
-          </div>
-        </div>
-      </div>
+      <SpaceAbout client:load />
     </div>
   </section>
 </Base>

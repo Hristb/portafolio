@@ -1,48 +1,69 @@
+/* ── Fluid typography ────────────────────────────────────────
+   Min (375px / 23.4375rem) → Max (1280px / 80rem)
+   Formula: clamp(min, preferred, max)
+   Scale: major-third(1.25) mobile → augmented-fourth(1.414) desktop
+─────────────────────────────────────────────── */
 html {
-  @apply text-base-sm md:text-base;
+  /* Body: 15px (375px) → 17px (1280px) */
+  font-size: clamp(0.9375rem, 0.875rem + 0.267vw, 1.0625rem);
 }
 
 body {
-  @apply bg-body text-base dark:bg-darkmode-body font-primary font-normal leading-relaxed text-text dark:text-darkmode-text;
+  @apply bg-body dark:bg-darkmode-body font-primary font-normal leading-relaxed text-text dark:text-darkmode-text;
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   @apply font-secondary font-bold leading-tight text-text-dark dark:text-darkmode-text-dark;
+  line-height: 1.15;
 }
 
-h1,
-.h1 {
-  @apply text-h1-sm md:text-h1;
+/* h1: 2rem (320px) → 3.5rem (1280px) */
+h1, .h1 {
+  font-size: clamp(1.75rem, 1.25rem + 2.667vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
 }
 
-h2,
-.h2 {
-  @apply text-h2-sm md:text-h2;
+/* h2: 1.5rem (320px) → 2.5rem (1280px) */
+h2, .h2 {
+  font-size: clamp(1.35rem, 1rem + 1.867vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
-h3,
-.h3 {
-  @apply text-h3-sm md:text-h3;
+/* h3: 1.2rem (320px) → 1.875rem (1280px) */
+h3, .h3 {
+  font-size: clamp(1.15rem, 0.9rem + 1.333vw, 1.75rem);
 }
 
-h4,
-.h4 {
-  @apply text-h4;
+/* h4: 1.05rem (320px) → 1.5rem (1280px) */
+h4, .h4 {
+  font-size: clamp(1.05rem, 0.85rem + 1.067vw, 1.45rem);
 }
 
-h5,
-.h5 {
-  @apply text-h5;
+/* h5: 0.95rem (320px) → 1.25rem (1280px) */
+h5, .h5 {
+  font-size: clamp(0.95rem, 0.8rem + 0.8vw, 1.2rem);
 }
 
-h6,
-.h6 {
-  @apply text-h6;
+/* h6: 0.875rem (320px) → 1.0625rem (1280px) */
+h6, .h6 {
+  font-size: clamp(0.875rem, 0.8rem + 0.4vw, 1rem);
+}
+
+/* Body text sizes */
+.text-lg {
+  font-size: clamp(1rem, 0.95rem + 0.267vw, 1.125rem);
+}
+
+.text-sm {
+  font-size: clamp(0.8125rem, 0.775rem + 0.2vw, 0.9rem);
+}
+
+.text-xs {
+  font-size: clamp(0.7rem, 0.675rem + 0.133vw, 0.8rem);
 }
 
 b,

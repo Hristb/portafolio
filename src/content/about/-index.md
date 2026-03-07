@@ -1,12 +1,14 @@
 ---
-title: "🚀 ¡Hola! Soy Hrist Joy"  
+title: "Hrist Joy Bartra Saavedra"  
 meta_title: "Sobre Mí"  
-description: ""  
+description: "Senior Backend Engineer especializado en FinTech, Neobanking, Java, Quarkus y Arquitectura BIAN."  
 image: "/images/avatar.png"  
 draft: false  
 ---  
-Apasionado por la tecnología, la innovación y el aprendizaje continuo, soy un Desarrollador Full Stack que disfruta ser parte de nuevas creaciones.
+Soy un **Senior Backend Engineer** con más de 6 años de experiencia en desarrollo de software, especializado en **Java**, **Quarkus**, **Spring Boot** y arquitecturas de microservicios para el sector **FinTech y Neobanking**.
 
-Desde mis inicios en el desarrollo, he buscado mejorar constantemente mis habilidades y compartir conocimientos. Aquí encontrarás más que solo código: experiencias, ideas y aprendizajes sobre desarrollo web, arquitectura en la nube y tecnología.
+Actualmente trabajo en **Indra** liderando la integración del core bancario con nuevos canales digitales bajo estándares **BIAN**, desarrollando soluciones para un Neobanco (Banco por WhatsApp) que incluyen interoperabilidad de billeteras (Yape/Mibanco), transferencias interbancarias y pagos entre tarjetas.
 
-Me motiva la evolución del sector, la optimización de procesos y la construcción de soluciones que realmente marquen la diferencia. Si compartes esta pasión, ¡bienvenido a un espacio donde la tecnología y la creatividad se unen para innovar! 🚀
+Tengo experiencia previa en empresas como **Canvia** (Sistema de Perfilamiento de Riesgo para el INER), **GLOBAL HITSS** (Sistema SIAC para Claro Perú) y **REVSA - Grupo Credivargas** (Dashboard KPI y sistemas de gestión interna).
+
+Soy un profesional autodidacta, analítico y con espíritu de superación constante. Me motiva construir soluciones robustas, escalables y seguras que generen impacto real. Manejo herramientas de **Cloud Computing** (Microsoft Azure), **DevOps** y hago uso intensivo de herramientas como **GitHub Copilot** para acelerar el ciclo de vida del desarrollo. 🚀

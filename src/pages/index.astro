@@ -1,13 +1,16 @@
 ---
-import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import CallToAction from "@/partials/CallToAction.astro";
-import Testimonial from "@/partials/Testimonial.astro";
 import type { Button, Feature } from "@/types";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 import { FaCheck } from "react-icons/fa";
+import HeroTerminal from "@/components/HeroTerminal";
+import BankingFlowDiagram from "@/components/BankingFlowDiagram";
+import TechStackGrid from "@/components/TechStackGrid";
+import ExperienceTimeline from "@/components/ExperienceTimeline";
+import GitHubReposSection from "@/components/GitHubReposSection";
+import HeroCTA from "@/components/HeroCTA";
 
 interface Homepage {
   banner: {
@@ -19,109 +22,265 @@ interface Homepage {
   features: Feature[];
 }
 
-const homepage = (await getEntry(
+const homepageEn = (await getEntry(
+  "homepage",
+  "-index.en"
+)) as CollectionEntry<"homepage"> | undefined;
+
+const homepageFallback = (await getEntry(
   "homepage",
   "-index"
 )) as CollectionEntry<"homepage">;
 
-const testimonial = (await getEntry(
-  "testimonialSection",
-  "testimonial"
-)) as CollectionEntry<"testimonialSection">;
-
-const call_to_action = (await getEntry(
-  "ctaSection",
-  "call-to-action"
-)) as CollectionEntry<"ctaSection">;
+const homepage = homepageEn ?? homepageFallback;
 
 const { banner, features } = homepage.data as Homepage;
+
+// Per-feature light-mode rainbow palette
+const LIGHT_STYLES = [
+  {
+    bg: "linear-gradient(135deg, #fdf4ff 0%, #faf0fe 50%, #f3e8ff 100%)",
+    border: "rgba(216,180,254,0.5)",
+    accentLine: "linear-gradient(90deg, transparent, #e879f9, #c084fc, transparent)",
+  },
+  {
+    bg: "linear-gradient(135deg, #eff6ff 0%, #e0f2fe 50%, #dbeafe 100%)",
+    border: "rgba(147,197,253,0.5)",
+    accentLine: "linear-gradient(90deg, transparent, #818cf8, #60a5fa, transparent)",
+  },
+  {
+    bg: "linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%)",
+    border: "rgba(110,231,183,0.5)",
+    accentLine: "linear-gradient(90deg, transparent, #34d399, #60a5fa, transparent)",
+  },
+];
 ---
 
 <Base>
-  <!-- Banner -->
-  <section class="section pt-14">
+  <!-- Hero section — kept as-is, title receives monospace styling -->
+  <section class="section pt-14 hero-section">
     <div class="container">
       <div class="row justify-center">
         <div class="lg:col-7 md:col-9 mb-8 text-center">
           <h1
             set:html={markdownify(banner.title)}
-            class="mb-4 text-h3 lg:text-h1"
+            class="mb-4 text-h3 lg:text-h1 reveal hero-mono-title"
           />
-          <p set:html={markdownify(banner.content)} class="mb-8" />
+          <p
+            set:html={markdownify(banner.content)}
+            class="mb-8 reveal delay-1"
+          />
           {
             banner.button.enable && (
               <a
-                class="btn btn-primary"
+                class="btn btn-primary reveal delay-2"
                 href={banner.button.link}
                 target={
                   banner.button.link.startsWith("http") ? "_blank" : "_self"
                 }
-                rel="noopener"
+                rel="noopener noreferrer"
               >
                 {banner.button.label}
               </a>
             )
           }
         </div>
-        {
-          banner.image && (
-            <div class="col-12">
-              <ImageMod
-                src={banner.image}
-                height={380}
-                width={1200}
-                alt="banner"
-                format="webp"
-              />
-            </div>
-          )
-        }
+        <div class="col-12 reveal delay-3">
+          <HeroTerminal client:load />
+        </div>
       </div>
     </div>
   </section>
-  <!-- /Banner -->
 
-  <!-- Features -->
+  <!-- Feature sections with space HUD aesthetic -->
   {
-    features.map((feature, index: number) => (
-      <section class={`section-sm ${index % 2 === 0 && "bg-gradient"}`}>
-        <div class="container">
-          <div class="row items-center justify-between">
-            <div
-              class={`mb:md-0 mb-6 md:col-5 ${index % 2 !== 0 && "md:order-2"}`}
-            >
-              <ImageMod
-                src={feature.image}
-                height={480}
-                width={520}
-                alt={feature.title}
-                format="webp"
-              />
-            </div>
-            <div class={`md:col-7 lg:col-6 ${index % 2 !== 0 && "md:order-1"}`}>
-              <h2 set:html={markdownify(feature.title)} class="mb-4" />
-              <p set:html={markdownify(feature.content)} class="mb-8 text-lg" />
-              <ul>
-                {feature.bulletpoints.map((bullet: string) => (
-                  <li class="relative mb-4 pl-6">
-                    <FaCheck className={"absolute left-0 top-1.5"} />
-                    <span set:html={markdownify(bullet)} />
-                  </li>
-                ))}
-              </ul>
-              {feature.button.enable && (
-                <a class="btn btn-primary mt-5" href={feature.button.link}>
-                  {feature.button.label}
-                </a>
-              )}
+    features.map((feature, index: number) => {
+      const ls = LIGHT_STYLES[index % LIGHT_STYLES.length];
+      return (
+        <section
+          class="section-sm"
+          style={`--lbg:${ls.bg};--lborder:${ls.border};--laccent:${ls.accentLine}`}
+          data-feature-hud
+        >
+          <div class="container">
+            <div class="feature-hud-card">
+              <div class="feature-hud-accent-line" />
+              <div class="row items-center justify-between" style="position:relative;z-index:1">
+                <div
+                  class={`mb:md-0 mb-6 md:col-5 reveal ${index % 2 !== 0 && "md:order-2"}`}
+                >
+                  {index === 0 && <BankingFlowDiagram client:visible />}
+                  {index === 1 && <TechStackGrid client:visible />}
+                  {index === 2 && <ExperienceTimeline client:visible />}
+                </div>
+                <div
+                  class={`md:col-7 lg:col-6 reveal delay-1 ${index % 2 !== 0 && "md:order-1"}`}
+                >
+                  <h2
+                    set:html={markdownify(feature.title)}
+                    class="mb-4 feature-hud-title"
+                  />
+                  <p
+                    set:html={markdownify(feature.content)}
+                    class="mb-8 text-lg feature-hud-desc"
+                  />
+                  <ul>
+                    {feature.bulletpoints.map((bullet: string) => (
+                      <li class="relative mb-4 pl-6">
+                        <FaCheck className={"absolute left-0 top-1.5 feature-hud-check"} />
+                        <span set:html={markdownify(bullet)} />
+                      </li>
+                    ))}
+                  </ul>
+                  {feature.button.enable && (
+                    <a
+                      class="btn feature-hud-btn mt-5"
+                      href={feature.button.link}
+                    >
+                      {feature.button.label}
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    ))
+        </section>
+      );
+    })
   }
-  <!-- /Features -->
 
-  <Testimonial testimonial={testimonial} />
-  <CallToAction call_to_action={call_to_action} />
+  <section class="section">
+    <div class="container">
+      <GitHubReposSection client:visible />
+    </div>
+  </section>
+  <HeroCTA client:load />
 </Base>
+
+<style is:global>
+  /* Hero title monospace font */
+  .hero-mono-title {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    letter-spacing: -0.01em;
+  }
+
+  /* Feature HUD card — shared */
+  .feature-hud-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Accent line at top of card */
+  .feature-hud-accent-line {
+    position: absolute;
+    top: 0;
+    left: 5%;
+    right: 5%;
+    height: 1px;
+    opacity: 0.55;
+    border-radius: 99px;
+  }
+
+  /* ── LIGHT MODE ─────────────────────────────────────────── */
+  html:not(.dark) .feature-hud-card {
+    background: var(--lbg);
+    border: 1px solid var(--lborder);
+    box-shadow: 0 4px 28px rgba(168, 85, 247, 0.06);
+  }
+
+  html:not(.dark) .feature-hud-accent-line {
+    background: var(--laccent);
+  }
+
+  html:not(.dark) .feature-hud-title {
+    letter-spacing: 0.01em;
+  }
+
+  html:not(.dark) .feature-hud-desc {
+    color: rgba(55, 30, 90, 0.65);
+  }
+
+  html:not(.dark) .feature-hud-btn {
+    background: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #60a5fa 100%) !important;
+    border: none !important;
+    color: white !important;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.28) !important;
+  }
+
+  html:not(.dark) .feature-hud-btn:hover {
+    box-shadow: 0 6px 28px rgba(168, 85, 247, 0.42) !important;
+    transform: translateY(-1px);
+  }
+
+  /* ── DARK MODE ──────────────────────────────────────────── */
+  html.dark .feature-hud-card {
+    background: linear-gradient(
+      135deg,
+      rgba(6, 5, 26, 0.96) 0%,
+      rgba(11, 10, 34, 0.98) 100%
+    );
+    border: 1px solid rgba(124, 58, 237, 0.16);
+    box-shadow:
+      0 0 40px rgba(124, 58, 237, 0.06),
+      inset 0 0 60px rgba(14, 165, 233, 0.02);
+  }
+
+  html.dark .feature-hud-accent-line {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #7c3aed,
+      #0ea5e9,
+      transparent
+    );
+  }
+
+  html.dark .feature-hud-title {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+    letter-spacing: 0.03em;
+    text-shadow: 0 0 24px rgba(124, 58, 237, 0.18);
+  }
+
+  html.dark .feature-hud-desc {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  /* Scanlines overlay */
+  html.dark .feature-hud-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255, 255, 255, 0.005) 3px,
+      rgba(255, 255, 255, 0.005) 4px
+    );
+    border-radius: inherit;
+    z-index: 0;
+  }
+
+  html.dark .feature-hud-btn {
+    background: linear-gradient(135deg, #7c3aed 0%, #0ea5e9 100%) !important;
+    border: none !important;
+    color: white !important;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3) !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  html.dark .feature-hud-btn:hover {
+    box-shadow: 0 0 32px rgba(124, 58, 237, 0.5) !important;
+  }
+
+  /* Even-indexed dark features get a slight cyan tint */
+  html.dark section:nth-of-type(even) .feature-hud-card {
+    border-color: rgba(14, 165, 233, 0.14);
+  }
+</style>

@@ -48,16 +48,16 @@ const { title, meta_title, description, image, noindex, canonical } =
     <link rel="shortcut icon" href={config.site.favicon} />
     <!-- theme meta -->
     <meta name="theme-name" content="astroplate" />
-    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="msapplication-TileColor" content="#0e0b1e" />
     <meta
       name="theme-color"
       media="(prefers-color-scheme: light)"
-      content="#fff"
+      content="#f8f7ff"
     />
     <meta
       name="theme-color"
       media="(prefers-color-scheme: dark)"
-      content="#000"
+      content="#0e0b1e"
     />
     <meta name="generator" content={Astro.generator} />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -169,6 +169,110 @@ const { title, meta_title, description, image, noindex, canonical } =
       }`}
     />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <style is:global>
+      /* ── Scroll reveal ──────────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible { opacity: 1; transform: none; }
+      .reveal.delay-1  { transition-delay: 0.12s; }
+      .reveal.delay-2  { transition-delay: 0.26s; }
+      .reveal.delay-3  { transition-delay: 0.42s; }
+      .reveal.delay-4  { transition-delay: 0.58s; }
+
+      /* ── Hero animated gradient mesh ─────────────────── */
+      .hero-section {
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(91, 63, 206, 0.06) 0%,
+          rgba(167, 139, 250, 0.04) 50%,
+          rgba(232, 168, 243, 0.05) 100%
+        );
+        background-size: 300% 300%;
+        animation: meshPulse 16s ease infinite;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .dark .hero-section::before {
+        background: linear-gradient(
+          135deg,
+          rgba(167, 139, 250, 0.13) 0%,
+          rgba(196, 130, 240, 0.09) 50%,
+          rgba(91, 63, 206, 0.11) 100%
+        );
+        background-size: 300% 300%;
+      }
+      .hero-section > * { position: relative; z-index: 1; }
+      @keyframes meshPulse {
+        0%, 100% { background-position: 0% 50%; }
+        50%       { background-position: 100% 50%; }
+      }
+
+      /* ── Glassmorphism feature cards ─────────────────── */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.62);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(221, 213, 247, 0.7);
+        border-radius: 1rem;
+        transition: box-shadow 0.35s ease, transform 0.35s ease;
+      }
+      .glass-card:hover {
+        box-shadow: 0 18px 42px rgba(91, 63, 206, 0.1);
+        transform: translateY(-4px);
+      }
+      .dark .glass-card {
+        background: rgba(26, 22, 53, 0.7);
+        border-color: rgba(45, 37, 80, 0.9);
+      }
+      .dark .glass-card:hover {
+        box-shadow: 0 18px 42px rgba(167, 139, 250, 0.15);
+      }
+
+      /* ── Cursor glow (desktop pointer only) ─────────── */
+      @media (pointer: fine) {
+        #cursor-glow {
+          position: fixed;
+          width: 480px;
+          height: 480px;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle,
+            rgba(91, 63, 206, 0.06) 0%,
+            transparent 68%
+          );
+          pointer-events: none;
+          transform: translate(-50%, -50%);
+          z-index: 9999;
+          top: -240px;
+          left: -240px;
+          will-change: left, top;
+          transition: left 0.06s linear, top 0.06s linear;
+        }
+        .dark #cursor-glow {
+          background: radial-gradient(
+            circle,
+            rgba(167, 139, 250, 0.1) 0%,
+            transparent 68%
+          );
+        }
+      }
+      @media (pointer: coarse) {
+        #cursor-glow { display: none; }
+      }
+    </style>
   </head>
   <body>
     <TwSizeIndicator />
@@ -178,5 +282,86 @@ const { title, meta_title, description, image, noindex, canonical } =
       <slot />
     </main>
     <Footer />
+
+    <!-- Cursor glow orb -->
+    <div id="cursor-glow" aria-hidden="true"></div>
+
+    <script>
+      // ─────────────────────────────────────────────────────────
+      // All logic is wrapped in initPage() and called on every
+      // astro:page-load event (fires after first load AND after
+      // every View Transition navigation).
+      // ─────────────────────────────────────────────────────────
+
+      const i18nMap: Record<string, Record<string, string>> = {
+        en: {
+          "nav.home": "Home",
+          "nav.about": "About Me",
+          "nav.projects": "Projects",
+          "nav.contact": "Contact",
+          "nav.cta": "Contact Me",
+        },
+      };
+
+      function applyI18n() {
+        const map = i18nMap["en"];
+        document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((el) => {
+          const key = el.dataset.i18n!;
+          if (map[key]) el.textContent = map[key];
+        });
+      }
+
+      // Keep a reference so we can disconnect before re-observing
+      let revealObserver: IntersectionObserver | null = null;
+
+      function initPage() {
+        // ── 1. Disconnect previous observer ──────────────────
+        if (revealObserver) {
+          revealObserver.disconnect();
+          revealObserver = null;
+        }
+
+        // ── 2. Reset .visible so elements animate in fresh ───
+        document.querySelectorAll<HTMLElement>(".reveal").forEach((el) => {
+          el.classList.remove("visible");
+        });
+
+        // ── 3. Create a new observer for this page's elements ─
+        revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        document.querySelectorAll<Element>(".reveal").forEach((el) =>
+          revealObserver!.observe(el)
+        );
+
+        // ── 4. Apply nav labels ───────────────────────
+        applyI18n();
+      }
+
+      // ── Cursor glow: set up once, persists across navigations
+      // (the element lives in the persistent body, not the slot)
+      (() => {
+        const glow = document.getElementById("cursor-glow");
+        if (!glow || !window.matchMedia("(pointer: fine)").matches) return;
+        // Use a named handler so we never add it twice
+        function onMouseMove(e: MouseEvent) {
+          glow!.style.left = e.clientX + "px";
+          glow!.style.top  = e.clientY + "px";
+        }
+        // Remove first in case of HMR re-run, then re-add
+        document.removeEventListener("mousemove", onMouseMove as EventListener);
+        document.addEventListener("mousemove", onMouseMove as EventListener);
+      })();
+
+      // ── Run on first load AND after every navigation ─────────
+      document.addEventListener("astro:page-load", initPage);
+    </script>
   </body>
 </html>

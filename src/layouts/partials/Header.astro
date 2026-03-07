@@ -20,6 +20,22 @@ export interface NavigationLink {
 const { main }: { main: NavigationLink[] } = menu;
 const { navigation_button, settings } = config;
 const { pathname } = Astro.url;
+
+// Map URL paths to i18n translation keys
+const navI18nKeys: Record<string, string> = {
+  "/": "nav.home",
+  "/about": "nav.about",
+  "/blog": "nav.projects",
+  "/contact": "nav.contact",
+};
+
+// Icon SVG paths per route — minimal geometric icons
+const navIcons: Record<string, string> = {
+  "/": `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>`,
+  "/about": `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`,
+  "/blog": `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+  "/contact": `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.73 14.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.48 4h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 11.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>`,
+};
 ---
 
 <header class={`header z-30 ${settings.sticky_header && "sticky top-0"}`}>
@@ -28,58 +44,74 @@ const { pathname } = Astro.url;
     <div class="order-0">
       <Logo />
     </div>
-    <!-- navbar toggler -->
+
+    <!-- navbar toggler (checkbox) -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
       for="nav-toggle"
-      class="order-3 cursor-pointer flex items-center lg:hidden text-text-dark dark:text-white lg:order-1"
+      class="nav-toggle-btn order-3 cursor-pointer flex items-center lg:hidden"
+      aria-label="Toggle navigation"
     >
-      <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
-        <title>Menu Open</title>
-        <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
-      </svg>
-      <svg id="hide-button" class="h-6 fill-current hidden" viewBox="0 0 20 20">
-        <title>Menu Close</title>
-        <polygon
-          points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
-          transform="rotate(45 10 10)"></polygon>
-      </svg>
+      <!-- Open: 3 staggered lines -->
+      <span id="show-button" class="nav-burger block" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+      <!-- Close: × -->
+      <span id="hide-button" class="nav-close hidden" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="4" y1="4" x2="18" y2="18"/>
+          <line x1="18" y1="4" x2="4" y2="18"/>
+        </svg>
+      </span>
     </label>
     <!-- /navbar toggler -->
+
+    <!-- Mobile full-screen overlay + Desktop nav -->
     <ul
       id="nav-menu"
-      class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8"
+      class="navbar-nav order-3 lg:order-1 lg:flex lg:w-auto lg:space-x-2 xl:space-x-8"
     >
+      <!-- Mobile overlay header (logo + close) -->
+      <li class="nav-overlay-header lg:hidden">
+        <span class="nav-overlay-logo">
+          <Logo />
+        </span>
+        <label for="nav-toggle" class="nav-overlay-close" aria-label="Close menu">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="4" y1="4" x2="18" y2="18"/>
+            <line x1="18" y1="4" x2="4" y2="18"/>
+          </svg>
+        </label>
+      </li>
+
       {
-        main.map((menu) => (
+        main.map((item) => (
           <>
-            {menu.hasChildren ? (
+            {item.hasChildren ? (
               <li class="nav-item nav-dropdown group relative">
                 <span
-                  class={`nav-link inline-flex items-center ${
-                    menu.children?.map(({ url }) => url).includes(pathname) ||
-                    menu.children
-                      ?.map(({ url }) => `${url}/`)
-                      .includes(pathname)
+                  class={`nav-link inline-flex items-center gap-2 ${
+                    item.children?.map(({ url }) => url).includes(pathname) ||
+                    item.children?.map(({ url }) => `${url}/`).includes(pathname)
                       ? "active"
                       : ""
                   }`}
                 >
-                  {menu.name}
+                  {item.name}
                   <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
                     <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                   </svg>
                 </span>
                 <ul class="nav-dropdown-list hidden group-hover:block lg:invisible lg:absolute lg:block lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100">
-                  {menu.children?.map((child) => (
+                  {item.children?.map((child) => (
                     <li class="nav-dropdown-item">
                       <a
                         href={child.url}
                         aria-label={child.name}
                         class={`nav-dropdown-link block ${
-                          (pathname === `${child.url}/` ||
-                            pathname === child.url) &&
-                          "active"
+                          (pathname === `${child.url}/` || pathname === child.url) && "active"
                         }`}
                       >
                         {child.name}
@@ -91,32 +123,36 @@ const { pathname } = Astro.url;
             ) : (
               <li class="nav-item">
                 <a
-                  href={menu.url}
-                  class={`nav-link block ${
-                    (pathname === `${menu.url}/` || pathname === menu.url) &&
-                    "active"
+                  href={item.url}
+                  data-i18n={navI18nKeys[item.url] ?? ""}
+                  class={`nav-link ${
+                    (pathname === `${item.url}/` || pathname === item.url) && "active"
                   }`}
                 >
-                  {menu.name}
+                  {/* Icon only shown on mobile overlay */}
+                  <span class="nav-link-icon lg:hidden" set:html={navIcons[item.url] ?? ""} />
+                  <span class="nav-link-label">{item.name}</span>
                 </a>
               </li>
             )}
           </>
         ))
       }
-      {
-        navigation_button.enable && (
-          <li class="mt-4 inline-block lg:hidden">
-            <a
-              class="btn btn-outline-primary btn-sm"
-              href={navigation_button.link}
-            >
-              {navigation_button.label}
-            </a>
-          </li>
-        )
-      }
+
+      <!-- Mobile overlay footer -->
+      <li class="nav-overlay-footer lg:hidden">
+        <ThemeSwitcher className="" />
+        {navigation_button.enable && (
+          <a
+            class="btn btn-outline-primary btn-sm"
+            href={navigation_button.link}
+          >
+            {navigation_button.label}
+          </a>
+        )}
+      </li>
     </ul>
+
     <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
       {
         settings.search && (
@@ -134,6 +170,7 @@ const { pathname } = Astro.url;
         navigation_button.enable && (
           <a
             class="btn btn-outline-primary btn-sm hidden lg:inline-block"
+            data-i18n="nav.cta"
             href={navigation_button.link}
           >
             {navigation_button.label}

@@ -1,24 +1,14 @@
 {
   "main": [
     {
-      "name": "facebook",
-      "icon": "FaFacebook",
-      "link": "https://www.facebook.com/"
-    },
-    {
-      "name": "twitter",
-      "icon": "FaTwitter",
-      "link": "https://twitter.com/"
+      "name": "linkedin",
+      "icon": "FaLinkedin",
+      "link": "https://www.linkedin.com/in/hrist-joy-bartra-saavedra-09b71913a/"
     },
     {
       "name": "github",
       "icon": "FaGithub",
-      "link": "https://www.github.com/"
-    },
-    {
-      "name": "linkedin",
-      "icon": "FaLinkedin",
-      "link": "https://www.linkedin.com/"
+      "link": "https://github.com/Hristb"
     }
   ]
 }

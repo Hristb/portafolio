@@ -1,0 +1,207 @@
+---
+/**
+ * FeatureCardsGrid — 2×2 floating illustrated cards.
+ * No text labels — pure SVG mockups with floating/elevated aesthetic.
+ * Tweak `rotations` or the SVG shapes to restyle without touching markup.
+ */
+
+interface Props {
+  bulletpoints: string[];
+}
+const { bulletpoints } = Astro.props;
+
+/** Slight initial rotations per card for the floating/scattered look */
+const rotations = ["-2.5deg", "2deg", "1.8deg", "-2deg"];
+
+/** Z-index layering so cards look stacked in depth */
+const zIndexes = [2, 4, 3, 2];
+
+const svgs: string[] = [
+  /* ── 0: VIDEO PLAYER ─────────────────────────────────────── */
+  `<svg viewBox="0 0 130 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="8" y="8" width="114" height="70" rx="8" class="svg-m"/>
+    <rect x="14" y="14" width="102" height="56" rx="5" class="svg-s"/>
+    <circle cx="65" cy="42" r="16" class="svg-m"/>
+    <polygon points="60,33 60,51 78,42" class="svg-l"/>
+    <rect x="14" y="90" width="60" height="5" rx="2.5" class="svg-m"/>
+    <rect x="14" y="90" width="24" height="5" rx="2.5" class="svg-l"/>
+    <circle cx="38" cy="92.5" r="6" class="svg-l"/>
+    <rect x="80" y="92" width="14" height="3" rx="1.5" class="svg-m"/>
+    <rect x="98" y="92" width="14" height="3" rx="1.5" class="svg-m"/>
+    <rect x="14" y="100" width="50" height="3" rx="1.5" class="svg-m"/>
+  </svg>`,
+
+  /* ── 1: BAR CHART ─────────────────────────────────────────── */
+  `<svg viewBox="0 0 130 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="14" y1="20" x2="120" y2="20" class="svg-s" stroke-width="1" stroke-dasharray="4 3"/>
+    <line x1="14" y1="42" x2="120" y2="42" class="svg-s" stroke-width="1" stroke-dasharray="4 3"/>
+    <line x1="14" y1="64" x2="120" y2="64" class="svg-s" stroke-width="1" stroke-dasharray="4 3"/>
+    <rect x="16" y="54" width="22" height="32" rx="5" class="svg-m"/>
+    <rect x="48" y="20" width="22" height="66" rx="5" class="svg-l"/>
+    <rect x="80" y="34" width="22" height="52" rx="5" class="svg-m"/>
+    <rect x="108" y="46" width="16" height="40" rx="5" class="svg-s"/>
+    <line x1="8" y1="86" x2="124" y2="86" class="svg-l" stroke-width="2"/>
+    <circle cx="27" cy="54" r="4.5" class="svg-l"/>
+    <circle cx="59" cy="20" r="4.5" class="svg-l"/>
+    <circle cx="91" cy="34" r="4.5" class="svg-l"/>
+    <circle cx="116" cy="46" r="4.5" class="svg-l"/>
+    <rect x="12" y="92" width="16" height="3" rx="1.5" class="svg-m"/>
+    <rect x="46" y="92" width="16" height="3" rx="1.5" class="svg-m"/>
+    <rect x="79" y="92" width="16" height="3" rx="1.5" class="svg-m"/>
+    <rect x="107" y="92" width="16" height="3" rx="1.5" class="svg-m"/>
+  </svg>`,
+
+  /* ── 2: EQUALIZER SLIDERS ─────────────────────────────────── */
+  `<svg viewBox="0 0 130 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="10" y1="26" x2="120" y2="26" class="svg-m" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="36" cy="26" r="11" class="svg-l"/>
+    <circle cx="36" cy="26" r="5.5" class="svg-s"/>
+    <line x1="10" y1="55" x2="120" y2="55" class="svg-m" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="85" cy="55" r="11" class="svg-l"/>
+    <circle cx="85" cy="55" r="5.5" class="svg-s"/>
+    <line x1="10" y1="84" x2="120" y2="84" class="svg-m" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="55" cy="84" r="11" class="svg-l"/>
+    <circle cx="55" cy="84" r="5.5" class="svg-s"/>
+  </svg>`,
+
+  /* ── 3: SCATTER / CLUSTER DOTS ────────────────────────────── */
+  `<svg viewBox="0 0 130 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="26"  cy="24"  r="6.5" class="svg-l"/>
+    <circle cx="42"  cy="14"  r="5"   class="svg-m"/>
+    <circle cx="18"  cy="40"  r="4.5" class="svg-s"/>
+    <circle cx="50"  cy="32"  r="4"   class="svg-m"/>
+    <circle cx="84"  cy="30"  r="7.5" class="svg-l"/>
+    <circle cx="100" cy="18"  r="5"   class="svg-m"/>
+    <circle cx="112" cy="38"  r="5.5" class="svg-s"/>
+    <circle cx="96"  cy="46"  r="4"   class="svg-m"/>
+    <circle cx="38"  cy="72"  r="6"   class="svg-l"/>
+    <circle cx="56"  cy="84"  r="4.5" class="svg-m"/>
+    <circle cx="22"  cy="86"  r="4"   class="svg-s"/>
+    <circle cx="70"  cy="62"  r="3.5" class="svg-s"/>
+    <circle cx="116" cy="66"  r="4.5" class="svg-m"/>
+    <circle cx="80"  cy="90"  r="4"   class="svg-l"/>
+    <circle cx="104" cy="80"  r="3"   class="svg-s"/>
+    <line x1="26"  y1="24"  x2="42"  y2="14"  class="svg-s" stroke-width="1.5"/>
+    <line x1="84"  y1="30"  x2="100" y2="18"  class="svg-s" stroke-width="1.5"/>
+    <line x1="38"  y1="72"  x2="56"  y2="84"  class="svg-s" stroke-width="1.5"/>
+    <line x1="84"  y1="30"  x2="112" y2="38"  class="svg-s" stroke-width="1.5"/>
+  </svg>`,
+];
+
+const cards = bulletpoints.slice(0, 4).map((_, i) => ({
+  svg:    svgs[i]       ?? svgs[0],
+  rotate: rotations[i] ?? "0deg",
+  z:      zIndexes[i]  ?? 1,
+}));
+---
+
+<!-- Outer wrapper keeps the grid from overflowing during hover lifts -->
+<div class="fcg-wrap">
+  <div class="fcg-grid">
+    {cards.map(({ svg, rotate, z }, i) => (
+      <div
+        class={`fcg-card fcg-card-${i}`}
+        style={`--rot:${rotate}; z-index:${z};`}
+      >
+        <Fragment set:html={svg} />
+      </div>
+    ))}
+  </div>
+</div>
+
+<style is:global>
+/* ─── Wrapper ─────────────────────────────────────── */
+.fcg-wrap {
+  perspective: 800px;
+  padding: 1.25rem;
+}
+
+/* ─── 2×2 floating grid ───────────────────────────── */
+.fcg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+/* ─── Individual card ─────────────────────────────── */
+.fcg-card {
+  border-radius: 18px;
+  padding: 1.25rem 1.1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* floating look: initial rotation + layered drop-shadow */
+  transform: rotate(var(--rot)) translateY(0px);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,.12),
+    0 14px 38px rgba(0,0,0,.18),
+    0 30px 60px rgba(0,0,0,.10);
+
+  transition:
+    transform 0.35s cubic-bezier(.22,.68,0,1.2),
+    box-shadow 0.35s ease;
+
+  will-change: transform;
+
+  /* light-mode card bg */
+  background: #eceaea;
+}
+
+/* card 1 (bar chart) gets a subtle stacked-paper shadow accent */
+.fcg-card-1 {
+  box-shadow:
+    6px 6px 0 #d4d2d2,
+    0 14px 38px rgba(0,0,0,.22),
+    0 30px 60px rgba(0,0,0,.12);
+}
+
+/* ─── Hover: lift + unrotate + bigger shadow ─────── */
+.fcg-card:hover {
+  transform: rotate(0deg) translateY(-10px) scale(1.04);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.14),
+    0 28px 60px rgba(0,0,0,.28),
+    0 48px 80px rgba(0,0,0,.12);
+}
+
+/* ─── Dark-mode card bg ───────────────────────────── */
+.dark .fcg-card         { background: #4e4c4c; }
+.dark .fcg-card-1 {
+  box-shadow:
+    6px 6px 0 #5e5c5c,
+    0 14px 38px rgba(0,0,0,.60),
+    0 30px 60px rgba(0,0,0,.40);
+}
+
+/* ─── SVG sizing ──────────────────────────────────── */
+.fcg-card svg {
+  width: 100%;
+  height: auto;
+  max-height: 7.5rem;
+  display: block;
+}
+
+/* ── SVG fill/stroke — light mode ───────────────── */
+.svg-m               { fill: #c0bdbd; }
+.svg-s               { fill: #d8d6d6; stroke: #d8d6d6; }
+.svg-l               { fill: #868484; }
+
+line.svg-m           { fill: none; stroke: #c0bdbd; }
+line.svg-s           { fill: none; stroke: #d8d6d6; }
+line.svg-l           { fill: none; stroke: #868484; }
+
+/* inner dot of slider knobs — matches card bg */
+circle.svg-s         { fill: #eceaea; stroke: none; }
+
+/* ── SVG fill/stroke — dark mode ─────────────────── */
+.dark .svg-m         { fill: #6a6868; }
+.dark .svg-s         { fill: #3d3b3b; stroke: #3d3b3b; }
+.dark .svg-l         { fill: #c4c1c1; }
+
+.dark line.svg-m     { fill: none; stroke: #6a6868; }
+.dark line.svg-s     { fill: none; stroke: #3d3b3b; }
+.dark line.svg-l     { fill: none; stroke: #c4c1c1; }
+
+.dark circle.svg-s   { fill: #4e4c4c; stroke: none; }
+</style>

@@ -1,4 +1,4 @@
-/* navbar toggler */
+/* navbar toggler — mobile full-screen overlay */
 input#nav-toggle:checked + label #show-button {
   @apply hidden;
 }
@@ -7,8 +7,21 @@ input#nav-toggle:checked + label #hide-button {
   @apply block;
 }
 
-input#nav-toggle:checked ~ #nav-menu {
-  @apply block;
+/* On desktop: just show the flex nav */
+@media (min-width: 1024px) {
+  input#nav-toggle:checked ~ #nav-menu {
+    /* desktop nav is always visible via CSS — no override needed */
+  }
+}
+
+/* On mobile: activate the full-screen overlay */
+@media (max-width: 1023px) {
+  input#nav-toggle:checked ~ #nav-menu {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+  }
 }
 
 /* form style */

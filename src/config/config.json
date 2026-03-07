@@ -24,13 +24,13 @@
 
   "params": {
     "contact_form_action": "#",
-    "copyright": "Designed And Developed by [Zeon Studio](https://zeon.studio)"
+    "copyright": "Hrist Joy Bartra Saavedra © 2026"
   },
 
   "navigation_button": {
     "enable": true,
-    "label": "Get Started",
-    "link": "https://github.com/zeon-studio/astroplate"
+    "label": "LinkedIn",
+    "link": "https://www.linkedin.com/in/hrist-joy-bartra-saavedra-09b71913a/"
   },
 
   "disqus": {
@@ -40,8 +40,8 @@
   },
 
   "metadata": {
-    "meta_author": "zeon.studio",
+    "meta_author": "Hrist Joy Bartra Saavedra",
     "meta_image": "/images/og-image.png",
-    "meta_description": "astro and tailwind boilerplate"
+    "meta_description": "Senior Backend Engineer | FinTech & Neobanking | Java, Quarkus, Spring Boot y Arquitectura BIAN. 6+ años construyendo soluciones financieras escalables."
   }
 }
