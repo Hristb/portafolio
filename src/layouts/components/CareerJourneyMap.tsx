@@ -3,6 +3,233 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { type NType, type JNode, NODES, NCOLOR } from "./careerData";
 
 // ═══════════════════════════════════════════════════════════════
+// MOBILE SNAKE MAP
+// ═══════════════════════════════════════════════════════════════
+const MOB_VBW  = 320;
+const LCOL     = 76;   // left column x
+const RCOL     = 244;  // right column x
+const ROW_START = 60;
+const ROW_STEP  = 88;
+
+// Assign snake x,y to each node
+const MOB_NODES = NODES.map((node, i) => ({
+  ...node,
+  mx: i % 2 === 0 ? LCOL : RCOL,
+  my: ROW_START + i * ROW_STEP,
+}));
+const MOB_VBH = ROW_START + (NODES.length - 1) * ROW_STEP + 90;
+
+function buildSnakeTrack() {
+  const parts: string[] = [`M ${MOB_NODES[0].mx},${MOB_NODES[0].my}`];
+  for (let i = 1; i < MOB_NODES.length; i++) {
+    const a = MOB_NODES[i - 1];
+    const b = MOB_NODES[i];
+    const cy = (a.my + b.my) / 2;
+    parts.push(`C ${a.mx},${cy} ${b.mx},${cy} ${b.mx},${b.my}`);
+  }
+  return parts.join(" ");
+}
+const SNAKE_TRACK = buildSnakeTrack();
+
+// Arrow midpoints for each segment
+const MOB_ARROWS = MOB_NODES.slice(0, -1).map((a, i) => {
+  const b = MOB_NODES[i + 1];
+  const mx = (a.mx + b.mx) / 2;
+  const my = (a.my + b.my) / 2;
+  const angle = Math.atan2(b.my - a.my, b.mx - a.mx) * (180 / Math.PI);
+  return { x: mx, y: my, a: angle };
+});
+
+export function MobileCareerMap({
+  activeId,
+  onNodeSelect,
+}: {
+  activeId: string | null;
+  onNodeSelect: (id: string | null) => void;
+}) {
+  const dark = useDark();
+
+  const trackFg = dark ? "rgba(124,58,237,.18)"  : "rgba(168,85,247,.15)";
+  const trackBd = dark ? "rgba(124,58,237,.46)"  : "rgba(168,85,247,.42)";
+  const nodeBg  = dark ? "rgba(6,4,22,.92)"      : "rgba(255,255,255,.96)";
+  const mutedC  = dark ? "rgba(255,255,255,.32)" : "rgba(100,72,150,.48)";
+  const gridCol = dark ? "#7c3aed"               : "#a78bfa";
+  const arrowFg = dark ? "#a78bfa"               : "#8b5cf6";
+  const mapBg   = dark ? "linear-gradient(160deg,#06051a,#0b0822 70%,#07071e)" : "linear-gradient(160deg,#fdf4ff,#f0f9ff 60%,#f0fdf4)";
+
+  return (
+    <div style={{
+      position: "relative",
+      width: "100%",
+      overflowY: "auto",
+      overflowX: "hidden",
+      background: mapBg,
+      WebkitOverflowScrolling: "touch",
+      maxHeight: 420,
+    } as React.CSSProperties}>
+      {/* grid */}
+      <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", opacity: .1 }} aria-hidden>
+        <defs>
+          <pattern id="mob-g" width="36" height="36" patternUnits="userSpaceOnUse">
+            <path d="M36 0L0 0 0 36" fill="none" stroke={gridCol} strokeWidth=".5" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#mob-g)" />
+      </svg>
+
+      <svg
+        viewBox={`0 0 ${MOB_VBW} ${MOB_VBH}`}
+        width="100%"
+        style={{ display: "block" }}
+        aria-label="Mapa de carrera vertical"
+      >
+        <defs>
+          <filter id="mob-glow">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b" />
+            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+          <filter id="mob-glow-sm">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b" />
+            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+
+        {/* ── TRACK ── */}
+        <path d={SNAKE_TRACK} fill="none"
+          stroke={dark ? "rgba(124,58,237,.09)" : "rgba(168,85,247,.07)"}
+          strokeWidth="44" strokeLinecap="round" strokeLinejoin="round" />
+        <path d={SNAKE_TRACK} fill="none"
+          stroke={trackBd} strokeWidth="30"
+          strokeLinecap="round" strokeLinejoin="round" />
+        <path d={SNAKE_TRACK} fill="none"
+          stroke={trackFg} strokeWidth="22"
+          strokeLinecap="round" strokeLinejoin="round" />
+        <path d={SNAKE_TRACK} fill="none"
+          stroke={dark ? "rgba(255,255,255,.055)" : "rgba(139,92,246,.18)"}
+          strokeWidth="1.5" strokeDasharray="8 12" strokeLinecap="round" />
+
+        {/* ── ARROWS ── */}
+        {MOB_ARROWS.map((a, i) => (
+          <g key={i} transform={`translate(${a.x},${a.y}) rotate(${a.a})`} opacity={dark ? .3 : .22}>
+            <path d="M-5.5,0 L0,-3.3 L5.5,0 L0,3.3 Z" fill={arrowFg} />
+          </g>
+        ))}
+
+        {/* ── NODES ── */}
+        {MOB_NODES.map((node) => {
+          const ring   = NCOLOR[node.type];
+          const isAct  = activeId === node.id;
+          const isEnd  = !!node.live;
+          const R      = isEnd ? 26 : 21;
+          // label & num: on the opposite side from the column
+          const isLeft = node.mx === LCOL;
+          const lblX   = isLeft ? node.mx + R + 8 : node.mx - R - 8;
+          const anchor = isLeft ? "start" : "end";
+
+          return (
+            <g key={node.id}
+              onClick={() => onNodeSelect(activeId === node.id ? null : node.id)}
+              style={{ cursor: "pointer" }}
+            >
+              {/* pulse ring — live */}
+              {isEnd && (
+                <circle cx={node.mx} cy={node.my} r={R + 7} fill="none" stroke={ring} strokeWidth="1" opacity=".3">
+                  <animate attributeName="r" values={`${R+4};${R+14};${R+4}`} dur="2.6s" repeatCount="indefinite" />
+                  <animate attributeName="opacity" values=".35;0;.35" dur="2.6s" repeatCount="indefinite" />
+                </circle>
+              )}
+              {/* active halo */}
+              {isAct && (
+                <circle cx={node.mx} cy={node.my} r={R + 7} fill="none"
+                  stroke={ring} strokeWidth="1.5" opacity=".38"
+                  filter="url(#mob-glow-sm)">
+                  <animate attributeName="opacity" values=".38;.16;.38" dur="1.4s" repeatCount="indefinite" />
+                </circle>
+              )}
+              {/* main circle */}
+              <circle cx={node.mx} cy={node.my} r={R}
+                fill={isAct ? ring : nodeBg}
+                stroke={ring} strokeWidth={isAct ? 2.5 : isEnd ? 2 : 1.5}
+                filter={isEnd ? "url(#mob-glow)" : undefined}
+              />
+              {/* num inside circle */}
+              <text x={node.mx} y={node.my - 9}
+                textAnchor="middle"
+                style={{ fontSize: 7.5, fontFamily: "ui-monospace,monospace", fill: isAct ? "rgba(255,255,255,.5)" : mutedC, userSelect: "none" }}>
+                {String(node.num).padStart(2, "0")}
+              </text>
+              {/* emoji */}
+              <text x={node.mx} y={node.my + 4}
+                textAnchor="middle" dominantBaseline="central"
+                style={{ fontSize: isEnd ? 18 : 15, userSelect: "none" }}>
+                {node.icon}
+              </text>
+
+              {/* label to the side */}
+              <text x={lblX} y={node.my - 6}
+                textAnchor={anchor}
+                style={{
+                  fontSize: 9.5, fontFamily: "ui-monospace,monospace",
+                  fill: isAct ? ring : (dark ? "rgba(255,255,255,.78)" : "rgba(60,30,110,.82)"),
+                  fontWeight: isAct ? "700" : "500",
+                  userSelect: "none",
+                }}>
+                {node.label.length > 11 ? node.label.slice(0, 10) + "…" : node.label}
+              </text>
+              <text x={lblX} y={node.my + 7}
+                textAnchor={anchor}
+                style={{
+                  fontSize: 7.5, fontFamily: "ui-monospace,monospace",
+                  fill: mutedC, userSelect: "none",
+                }}>
+                {node.period.length > 16 ? node.period.slice(0, 15) + "…" : node.period}
+              </text>
+
+              {/* LIVE badge */}
+              {node.live && (
+                <>
+                  <rect x={node.mx - 20} y={node.my + R + 4} width={40} height={13} rx={4}
+                    fill="#22c55e18" stroke="#22c55e44" strokeWidth=".8" />
+                  <text x={node.mx} y={node.my + R + 10}
+                    textAnchor="middle" dominantBaseline="central"
+                    style={{ fontSize: 7, fontFamily: "ui-monospace,monospace", fill: "#22c55e", fontWeight: 700, userSelect: "none" }}>
+                    ● LIVE
+                  </text>
+                </>
+              )}
+              {/* START marker */}
+              {node.isStart && (
+                <text x={node.mx} y={node.my + R + 20}
+                  textAnchor="middle"
+                  style={{ fontSize: 6.5, fontFamily: "ui-monospace,monospace", fill: "#10b981", opacity: .8, userSelect: "none" }}>
+                  INICIO
+                </text>
+              )}
+            </g>
+          );
+        })}
+
+        {/* ── LEGEND bottom ── */}
+        {([
+          { t: "job"       as NType, l: "Empresa"     },
+          { t: "tech"      as NType, l: "Tecnología"  },
+          { t: "study"     as NType, l: "Formación"   },
+          { t: "milestone" as NType, l: "Hito"        },
+        ]).map(({ t, l }, i) => (
+          <g key={t} transform={`translate(${i < 2 ? 16 : 170},${MOB_VBH - 58 + (i % 2) * 16})`}>
+            <circle r={4} fill={NCOLOR[t]} />
+            <text x={10} y={0} dominantBaseline="central"
+              style={{ fontSize: 8, fontFamily: "ui-monospace,monospace", fill: mutedC, userSelect: "none" }}>
+              {l}
+            </text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
 // CONFIG
 // ═══════════════════════════════════════════════════════════════
 // Track path — endpoint of each cubic bezier coincides with node x,y

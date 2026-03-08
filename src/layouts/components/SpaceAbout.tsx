@@ -1,216 +1,225 @@
 ﻿"use client";
 import React, { useEffect, useRef, useState } from "react";
 import NeuralAbout from "./NeuralAbout";
-import CareerJourneyMap from "./CareerJourneyMap";
+import CareerJourneyMap, { MobileCareerMap } from "./CareerJourneyMap";
 import { type JNode, NODES, NCOLOR } from "./careerData";
 
 // â”€â”€ Mobile About â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function MobileAbout({ dark, T }: { dark: boolean; T: typeof DM }) {
-  const skills = [
-    { cat: "Backend",       color: "#0ea5e9", items: ["Java 17", "Quarkus", "Spring Boot", "APIs REST", "BIAN"] },
-    { cat: "Cloud & DevOps",color: "#06b6d4", items: ["Microsoft Azure", "Docker", "Kubernetes", "CI/CD", "ADF"] },
-    { cat: "Frontend",      color: "#8b5cf6", items: ["Angular", "TypeScript", "SCSS", "TailwindCSS"] },
-    { cat: "Databases",     color: "#10b981", items: ["MySQL", "Oracle", "MongoDB", "SQL"] },
-  ];
-  const experience = [
-    { company: "Indra",              role: "Senior Backend Engineer",  period: "ago 2023 â€“ Presente", color: "#7c3aed" },
-    { company: "Canvia",             role: "Analista Programador",     period: "abr 2022 â€“ ago 2023",  color: "#0ea5e9" },
-    { company: "GLOBAL HITSS",       role: "Analista Programador",     period: "oct 2021 â€“ abr 2022",  color: "#06b6d4" },
-    { company: "REVSA â€“ Credivargas",role: "Desarrollador",            period: "abr 2019 â€“ nov 2021",  color: "#10b981" },
-  ];
-  const repos = [
-    { name: "pagos-microservice", lang: "Java",  desc: "Microservicio de pagos" },
-    { name: "spring-security",    lang: "Java",  desc: "Caso prÃ¡ctico de seguridad" },
-    { name: "service-configuration",lang:"Java", desc: "ConfiguraciÃ³n de servicios" },
-    { name: "juego-memoria",      lang: "HTML",  desc: "Memory game" },
-    { name: "books-app",          lang: "HTML",  desc: "App de libros" },
-  ];
-  const langColor: Record<string, string> = {
-    Java: "#f59e0b", HTML: "#e44d26", MDX: "#8b5cf6",
-  };
+function MobileBottomSheet({
+  node,
+  dark,
+  T,
+  onClose,
+}: {
+  node: JNode | null;
+  dark: boolean;
+  T: typeof DM;
+  onClose: () => void;
+}) {
+  const [blink, setBlink] = useState(true);
+  const [livePulse, setLivePulse] = useState(true);
 
-  const card: React.CSSProperties = {
-    borderRadius: 12,
-    padding: "16px",
-    background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
-    border: dark ? "1px solid rgba(124,58,237,0.15)" : "1px solid rgba(168,85,247,0.12)",
+  useEffect(() => {
+    const iv1 = setInterval(() => setBlink((v) => !v), 530);
+    const iv2 = setInterval(() => setLivePulse((v) => !v), 1100);
+    return () => { clearInterval(iv1); clearInterval(iv2); };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = node ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [node]);
+
+  if (!node) return null;
+
+  const ring = NCOLOR[node.type];
+  const TYPE_NAMES: Record<string, string> = {
+    job: "EMPRESA", study: "FORMACIÓN", tech: "TECNOLOGÍA",
+    milestone: "HITO", home: "ORIGEN",
   };
 
   return (
-    <div style={{ padding: "20px 16px", display: "flex", flexDirection: "column", gap: 18 }}>
+    <>
+      <style>{`
+        @keyframes mbs-fadein { from { opacity: 0 } to { opacity: 1 } }
+        @keyframes mbs-slideup { from { transform: translateY(100%) } to { transform: translateY(0) } }
+      `}</style>
 
-      {/* â”€â”€ Name & role â”€â”€ */}
-      <div style={{ textAlign: "center" }}>
-        <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.3em", color: T.eyebrow, margin: "0 0 6px" }}>
-          BACKEND ENGINEER Â· FINTECH
-        </p>
-        <h2 style={{ fontFamily: "monospace", fontWeight: 700, fontSize: "1.35rem", margin: "0 0 4px", color: T.text, letterSpacing: "0.04em" }}>
-          Hrist Joy Bartra
-        </h2>
-        <p style={{ fontFamily: "monospace", fontSize: 11, color: T.textMuted, margin: 0, letterSpacing: "0.08em" }}>
-          Java Â· Quarkus Â· Azure Â· BIAN
-        </p>
-      </div>
+      {/* Backdrop */}
+      <div
+        onClick={onClose}
+        style={{
+          position: "fixed", inset: 0, zIndex: 9000,
+          background: "rgba(0,0,0,0.55)",
+          backdropFilter: "blur(4px)",
+          WebkitBackdropFilter: "blur(4px)",
+          animation: "mbs-fadein 0.22s ease",
+        } as React.CSSProperties}
+      />
 
-      {/* â”€â”€ Stats row â”€â”€ */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
-        {[
-          { value: "6+",  label: "AÃ±os exp." },
-          { value: "4",   label: "Empresas" },
-          { value: "163", label: "Commits/aÃ±o" },
-        ].map((s) => (
-          <div key={s.value} style={{ ...card, textAlign: "center", padding: "12px 8px" }}>
-            <p style={{ fontFamily: "monospace", fontWeight: 700, fontSize: "1.3rem", margin: "0 0 2px", color: T.stat }}>{s.value}</p>
-            <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.15em", color: T.textMuted, margin: 0, textTransform: "uppercase" }}>{s.label}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* â”€â”€ Bio â”€â”€ */}
-      <div style={{ ...card }}>
-        <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.25em", color: T.eyebrow, margin: "0 0 8px" }}>ACERCA DE</p>
-        <p style={{ fontSize: 13, lineHeight: 1.65, color: T.text, margin: 0 }}>
-          Desarrollador de software especializado en microservicios con <strong style={{ color: T.stat }}>Java 17 y Quarkus</strong>, arquitecturas bajo estÃ¡ndar <strong style={{ color: T.stat }}>BIAN</strong> para FinTech y Neobanking. Actualmente en <strong style={{ color: T.stat }}>Indra</strong> liderando el core bancario de un Banco por WhatsApp.
-        </p>
-      </div>
-
-      {/* â”€â”€ Skills â”€â”€ */}
-      <div style={{ ...card }}>
-        <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.25em", color: T.eyebrow, margin: "0 0 12px" }}>STACK TECNOLÃ“GICO</p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          {skills.map((group) => (
-            <div key={group.cat}>
-              <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.2em", color: group.color, margin: "0 0 6px", textTransform: "uppercase" }}>{group.cat}</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                {group.items.map((item) => (
-                  <span key={item} style={{
-                    fontSize: 11, padding: "3px 9px", borderRadius: 20, fontFamily: "monospace",
-                    background: dark ? `${group.color}18` : `${group.color}14`,
-                    border: `1px solid ${group.color}40`,
-                    color: dark ? group.color : group.color,
-                  }}>{item}</span>
-                ))}
-              </div>
-            </div>
-          ))}
+      {/* Sheet */}
+      <div
+        style={{
+          position: "fixed", left: 0, right: 0, bottom: 0, zIndex: 9001,
+          borderRadius: "22px 22px 0 0",
+          background: dark ? "rgba(6,5,26,0.98)" : "rgba(255,255,255,0.99)",
+          border: `1px solid ${ring}40`,
+          borderBottom: "none",
+          boxShadow: dark
+            ? `0 -8px 60px rgba(0,0,0,0.7), 0 0 50px ${ring}25`
+            : `0 -4px 40px rgba(0,0,0,0.12)`,
+          maxHeight: "80vh",
+          overflowY: "auto",
+          animation: "mbs-slideup 0.34s cubic-bezier(0.34,1.2,0.64,1)",
+          WebkitOverflowScrolling: "touch",
+        } as React.CSSProperties}
+      >
+        {/* Drag handle */}
+        <div style={{ textAlign: "center", paddingTop: 14, paddingBottom: 6 }}>
+          <div style={{
+            display: "inline-block", width: 44, height: 4.5, borderRadius: 3,
+            background: dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.14)",
+          }} />
         </div>
-      </div>
 
-      {/* â”€â”€ Experience â”€â”€ */}
-      <div style={{ ...card }}>
-        <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.25em", color: T.eyebrow, margin: "0 0 12px" }}>EXPERIENCIA</p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-          {experience.map((exp, i) => (
-            <div key={exp.company} style={{ display: "flex", gap: 12, paddingBottom: i < experience.length - 1 ? 14 : 0, position: "relative" }}>
-              {/* Timeline line */}
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
-                <div style={{ width: 10, height: 10, borderRadius: "50%", background: exp.color, flexShrink: 0, marginTop: 3, boxShadow: dark ? `0 0 6px ${exp.color}` : "none" }} />
-                {i < experience.length - 1 && (
-                  <div style={{ width: 1, flex: 1, background: dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.1)", marginTop: 4 }} />
-                )}
-              </div>
-              <div style={{ paddingBottom: i < experience.length - 1 ? 4 : 0 }}>
-                <p style={{ fontWeight: 600, fontSize: 13, color: T.text, margin: "0 0 2px" }}>{exp.company}</p>
-                <p style={{ fontSize: 12, color: exp.color, margin: "0 0 2px", fontFamily: "monospace" }}>{exp.role}</p>
-                <p style={{ fontSize: 10, color: T.textMuted, margin: 0, fontFamily: "monospace", letterSpacing: "0.05em" }}>{exp.period}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* â”€â”€ GitHub repos â”€â”€ */}
-      <div style={{ ...card }}>
-        <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.25em", color: T.eyebrow, margin: "0 0 12px" }}>
-          REPOSITORIOS Â· GITHUB
-        </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          {repos.map((repo) => (
-            <a
-              key={repo.name}
-              href={`https://github.com/Hristb/${repo.name}`}
-              target="_blank"
-              rel="noopener noreferrer"
+        <div style={{ padding: "0 20px 36px" }}>
+          {/* Terminal label + close */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
+            <p style={{
+              fontFamily: "ui-monospace,monospace", fontSize: 9, letterSpacing: "0.24em",
+              color: ring, margin: 0, textTransform: "uppercase",
+            }}>
+              $ ./node-{String(node.num).padStart(2, "0")}
+              <span style={{ opacity: blink ? 1 : 0, transition: "opacity 0.1s" }}>_</span>
+              {" · "}{TYPE_NAMES[node.type]}
+            </p>
+            <button
+              onClick={onClose}
               style={{
-                display: "flex", alignItems: "center", justifyContent: "space-between",
-                padding: "10px 12px", borderRadius: 8, textDecoration: "none",
-                background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.025)",
-                border: dark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.07)",
+                background: "none",
+                border: `1px solid ${dark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)"}`,
+                cursor: "pointer", borderRadius: 8, padding: "5px 12px",
+                fontFamily: "ui-monospace,monospace", fontSize: 10,
+                color: T.textMuted, letterSpacing: "0.06em",
               }}
-            >
-              <div>
-                <p style={{ fontFamily: "monospace", fontSize: 12, color: T.stat, margin: "0 0 2px", fontWeight: 600 }}>{repo.name}</p>
-                <p style={{ fontSize: 11, color: T.textMuted, margin: 0 }}>{repo.desc}</p>
-              </div>
+            >✕ CERRAR</button>
+          </div>
+
+          {/* Icon + name + period */}
+          <div style={{ textAlign: "center", padding: "4px 0 18px" }}>
+            <div style={{
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              width: 80, height: 80, borderRadius: "50%",
+              background: `${ring}14`, border: `2px solid ${ring}3a`,
+              boxShadow: dark ? `0 0 36px ${ring}50, 0 0 70px ${ring}1a` : `0 0 28px ${ring}2a`,
+              marginBottom: 14,
+            }}>
+              <span style={{ fontSize: 38 }}>{node.icon}</span>
+            </div>
+            <h3 style={{
+              fontFamily: "ui-monospace,monospace", fontWeight: 700,
+              fontSize: "1.2rem", color: T.text, margin: "0 0 5px", letterSpacing: "0.04em",
+            }}>{node.label}</h3>
+            <p style={{
+              fontFamily: "ui-monospace,monospace", fontSize: 11,
+              color: ring, margin: "0 0 10px", letterSpacing: "0.06em",
+            }}>{node.period}</p>
+            {node.live && (
               <span style={{
-                fontSize: 10, padding: "2px 8px", borderRadius: 20, fontFamily: "monospace",
-                background: `${langColor[repo.lang] ?? "#888"}22`,
-                border: `1px solid ${langColor[repo.lang] ?? "#888"}50`,
-                color: langColor[repo.lang] ?? "#888",
-              }}>{repo.lang}</span>
-            </a>
-          ))}
+                display: "inline-flex", alignItems: "center", gap: 5, fontSize: 9,
+                padding: "3px 11px", borderRadius: 5,
+                background: "#22c55e12", border: "1px solid #22c55e36",
+                color: "#22c55e", fontFamily: "ui-monospace,monospace", letterSpacing: "0.18em",
+              }}>
+                <span style={{
+                  width: 6, height: 6, borderRadius: "50%", background: "#22c55e",
+                  display: "inline-block",
+                  boxShadow: livePulse ? "0 0 7px #22c55e" : "none",
+                  transition: "box-shadow 0.5s",
+                }} />
+                VIVO · PRESENTE
+              </span>
+            )}
+          </div>
+
+          {/* Divider */}
+          <div style={{ height: 1, background: `${ring}28`, marginBottom: 16 }} />
+
+          {/* Description */}
+          <div style={{
+            borderRadius: 12, padding: "14px 16px",
+            background: dark ? `${ring}0b` : `${ring}07`,
+            border: `1px solid ${ring}22`,
+            marginBottom: 16,
+          }}>
+            <p style={{ fontSize: 13.5, lineHeight: 1.75, color: T.text, margin: 0 }}>
+              {node.desc}
+            </p>
+          </div>
+
+          {/* Tags */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 22 }}>
+            {node.tags.map((tag) => (
+              <span key={tag} style={{
+                fontSize: 11, padding: "4px 11px", borderRadius: 20,
+                fontFamily: "ui-monospace,monospace",
+                background: dark ? `${ring}18` : `${ring}10`,
+                border: `1px solid ${ring}40`, color: ring,
+              }}>{tag}</span>
+            ))}
+          </div>
+
+          {/* Counter */}
+          <p style={{
+            fontFamily: "ui-monospace,monospace", fontSize: 8.5,
+            color: T.textMuted, letterSpacing: "0.2em", margin: "0 0 18px",
+            textTransform: "uppercase",
+          }}>
+            {TYPE_NAMES[node.type]} · #{String(node.num).padStart(2, "0")} / {NODES.length}
+          </p>
+
+          {/* CTA buttons */}
+          <div style={{ display: "flex", gap: 9 }}>
+            <a
+              href="https://www.linkedin.com/in/hrist-joy-bartra-saavedra-09b71913a/"
+              target="_blank" rel="noopener noreferrer"
+              style={{
+                flex: 1, textAlign: "center", padding: "12px 4px", borderRadius: 10,
+                fontFamily: "ui-monospace,monospace", fontSize: 10, fontWeight: 700,
+                letterSpacing: "0.1em", textDecoration: "none", color: "#fff",
+                background: dark
+                  ? "linear-gradient(135deg, #7c3aed, #0ea5e9)"
+                  : "linear-gradient(135deg, #ec4899, #a855f7)",
+              }}
+            >LINKEDIN</a>
+            <a
+              href="https://github.com/Hristb"
+              target="_blank" rel="noopener noreferrer"
+              style={{
+                flex: 1, textAlign: "center", padding: "12px 4px", borderRadius: 10,
+                fontFamily: "ui-monospace,monospace", fontSize: 10, fontWeight: 700,
+                letterSpacing: "0.1em", textDecoration: "none",
+                color: dark ? "#fff" : "#1a1a1a",
+                background: dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)",
+                border: dark ? "1px solid rgba(255,255,255,0.15)" : "1px solid rgba(0,0,0,0.1)",
+              }}
+            >GITHUB</a>
+            <a
+              href="mailto:hristbartra@gmail.com"
+              style={{
+                flex: 1, textAlign: "center", padding: "12px 4px", borderRadius: 10,
+                fontFamily: "ui-monospace,monospace", fontSize: 10, fontWeight: 700,
+                letterSpacing: "0.1em", textDecoration: "none", color: "#fff",
+                background: "linear-gradient(135deg, #7c3aed, #5b21b6)",
+              }}
+            >EMAIL</a>
+          </div>
         </div>
-        <a
-          href="https://github.com/Hristb"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "block", textAlign: "center", marginTop: 12,
-            fontFamily: "monospace", fontSize: 11, letterSpacing: "0.2em",
-            color: T.stat, textDecoration: "none", textTransform: "uppercase",
-          }}
-        >
-          Ver todos los repositorios â†’
-        </a>
       </div>
-
-      {/* â”€â”€ Links â”€â”€ */}
-      <div style={{ display: "flex", gap: 10 }}>
-        <a
-          href="https://www.linkedin.com/in/hrist-joy-bartra-saavedra-09b71913a/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            flex: 1, textAlign: "center", padding: "11px 8px", borderRadius: 10,
-            fontFamily: "monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em",
-            textDecoration: "none", color: "#fff",
-            background: "linear-gradient(135deg, #0077b5, #005fa3)",
-          }}
-        >
-          LINKEDIN
-        </a>
-        <a
-          href="https://github.com/Hristb"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            flex: 1, textAlign: "center", padding: "11px 8px", borderRadius: 10,
-            fontFamily: "monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em",
-            textDecoration: "none",
-            color: dark ? "#fff" : "#1a1a1a",
-            background: dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)",
-            border: dark ? "1px solid rgba(255,255,255,0.15)" : "1px solid rgba(0,0,0,0.12)",
-          }}
-        >
-          GITHUB
-        </a>
-        <a
-          href="mailto:hristbartra@gmail.com"
-          style={{
-            flex: 1, textAlign: "center", padding: "11px 8px", borderRadius: 10,
-            fontFamily: "monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em",
-            textDecoration: "none", color: "#fff",
-            background: "linear-gradient(135deg, #7c3aed, #5b21b6)",
-          }}
-        >
-          EMAIL
-        </a>
-      </div>
-
-    </div>
+    </>
   );
 }
+
 
 // â”€â”€ Dark-mode detection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function useDarkMode() {
@@ -744,9 +753,111 @@ export default function SpaceAbout() {
       {/* â”€â”€ MOBILE LAYOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       {isMobile ? (
         <>
-          <MobileAbout dark={dark} T={T} />
+          {/* Compact mobile header */}
+          <div style={{
+            padding: "18px 18px 14px",
+            borderBottom: `1px solid ${T.headerBorder}`,
+            position: "relative", zIndex: 10,
+          }}>
+            <div style={{ display: "flex", gap: 14, alignItems: "center", marginBottom: 14 }}>
+              {/* Avatar */}
+              <div style={{
+                width: 52, height: 52, borderRadius: "50%", flexShrink: 0,
+                background: dark
+                  ? "linear-gradient(135deg, #7c3aed, #0ea5e9)"
+                  : "linear-gradient(135deg, #a855f7, #60a5fa)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                boxShadow: dark ? "0 0 20px rgba(124,58,237,0.5)" : "0 0 14px rgba(168,85,247,0.22)",
+                border: dark ? "2px solid rgba(14,165,233,0.4)" : "2px solid rgba(168,85,247,0.3)",
+              }}>
+                <span style={{
+                  fontFamily: "ui-monospace,monospace", fontWeight: 700,
+                  fontSize: 17, color: "#fff", letterSpacing: 2,
+                }}>HB</span>
+              </div>
+              <div>
+                <h3 style={{
+                  fontFamily: "ui-monospace,monospace", fontWeight: 700,
+                  fontSize: "1.0rem", color: T.text, margin: "0 0 3px", letterSpacing: "0.04em",
+                }}>Hrist Joy Bartra</h3>
+                <p style={{
+                  fontFamily: "ui-monospace,monospace", fontSize: 8.5,
+                  color: T.textMuted, margin: "0 0 5px", letterSpacing: "0.14em",
+                }}>SENIOR BACKEND ENGINEER</p>
+                <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                  <span style={{
+                    width: 6, height: 6, borderRadius: "50%", background: "#22c55e",
+                    boxShadow: "0 0 8px #22c55e", display: "inline-block",
+                  }} />
+                  <span style={{
+                    fontFamily: "ui-monospace,monospace", fontSize: 8.5,
+                    color: "#22c55e", letterSpacing: "0.14em",
+                  }}>INDRA · PRESENTE</span>
+                </div>
+              </div>
+            </div>
+            {/* Stats row */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 8 }}>
+              {[
+                { v: "6+",  l: "Años exp." },
+                { v: "4",   l: "Empresas" },
+                { v: "163", l: "Commits/año" },
+              ].map((s) => (
+                <div key={s.v} style={{
+                  borderRadius: 8, padding: "9px 6px", textAlign: "center",
+                  background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+                  border: dark ? "1px solid rgba(124,58,237,0.15)" : "1px solid rgba(168,85,247,0.12)",
+                }}>
+                  <p style={{
+                    fontFamily: "ui-monospace,monospace", fontWeight: 700,
+                    fontSize: "1.1rem", margin: "0 0 2px",
+                    color: T.stat, textShadow: T.statShadow,
+                  }}>{s.v}</p>
+                  <p style={{
+                    fontFamily: "ui-monospace,monospace", fontSize: 8,
+                    letterSpacing: "0.12em", color: T.textMuted,
+                    margin: 0, textTransform: "uppercase",
+                  }}>{s.l}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Career snake map – mobile vertical layout */}
+          <div style={{ position: "relative", zIndex: 10 }}>
+            <MobileCareerMap activeId={journeyId} onNodeSelect={setJourneyId} />
+          </div>
+
+          {/* Hint bar */}
+          <div style={{
+            padding: "10px 18px",
+            borderTop: `1px solid ${T.footerBorder}`,
+            textAlign: "center",
+            position: "relative", zIndex: 10,
+          }}>
+            <p style={{
+              fontFamily: "ui-monospace,monospace", fontSize: 9,
+              letterSpacing: "0.22em", color: T.textMuted,
+              margin: 0, textTransform: "uppercase",
+            }}>
+              ► TAP UN NODO PARA EXPLORAR
+            </p>
+          </div>
+
           <CornerBrackets color={T.bracket} />
-          <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: T.accentLine, opacity: dark ? 0.4 : 0.6, zIndex: 20, pointerEvents: "none" }} />
+          <div style={{
+            position: "absolute", top: 0, left: 0, right: 0, height: 1,
+            background: T.accentLine, opacity: dark ? 0.4 : 0.6,
+            zIndex: 20, pointerEvents: "none",
+          }} />
+
+          {/* Bottom sheet modal */}
+          <MobileBottomSheet
+            node={journeyNode}
+            dark={dark}
+            T={T}
+            onClose={() => setJourneyId(null)}
+          />
         </>
       ) : (
         <>

@@ -1,8 +1,8 @@
 ---
 # Banner
 banner:
-  title: "Senior Backend Engineer | FinTech & Neobanking"
-  content: "Software developer with over 6 years of experience, specialized in Java, Quarkus, Spring Boot and microservices architectures under BIAN standards. Building the future of digital financial services."
+  title: "Hrist Bartra"
+  content: "Senior Backend Engineer · FinTech & Neobanking — Software developer with over 6 years of experience, specialized in Java, Quarkus, Spring Boot and microservices architectures under BIAN standards. Building the future of digital financial services."
   image: "/images/banner.png"
   button:
     enable: true
