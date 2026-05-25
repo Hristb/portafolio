@@ -36,33 +36,40 @@ const homepage = homepageEn ?? homepageFallback;
 
 const { banner, features } = homepage.data as Homepage;
 
-// Per-feature light-mode rainbow palette
+// Per-feature light-mode — unified violet/purple family
 const LIGHT_STYLES = [
   {
-    bg: "linear-gradient(135deg, #fdf4ff 0%, #faf0fe 50%, #f3e8ff 100%)",
+    bg: "linear-gradient(135deg, #fdf4ff 0%, #f5f3ff 50%, #f3e8ff 100%)",
+    border: "rgba(167,139,250,0.45)",
+    accentLine: "linear-gradient(90deg, transparent, #a78bfa, #7c3aed, transparent)",
+  },
+  {
+    bg: "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 50%, #e9d5ff 100%)",
+    border: "rgba(196,165,253,0.5)",
+    accentLine: "linear-gradient(90deg, transparent, #7c3aed, #6d28d9, transparent)",
+  },
+  {
+    bg: "linear-gradient(135deg, #fdf4ff 0%, #f3e8ff 50%, #ede9fe 100%)",
     border: "rgba(216,180,254,0.5)",
-    accentLine: "linear-gradient(90deg, transparent, #e879f9, #c084fc, transparent)",
-  },
-  {
-    bg: "linear-gradient(135deg, #eff6ff 0%, #e0f2fe 50%, #dbeafe 100%)",
-    border: "rgba(147,197,253,0.5)",
-    accentLine: "linear-gradient(90deg, transparent, #818cf8, #60a5fa, transparent)",
-  },
-  {
-    bg: "linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%)",
-    border: "rgba(110,231,183,0.5)",
-    accentLine: "linear-gradient(90deg, transparent, #34d399, #60a5fa, transparent)",
+    accentLine: "linear-gradient(90deg, transparent, #8b5cf6, #a78bfa, transparent)",
   },
 ];
 ---
 
 <Base>
-  <!-- Hero section — kept as-is, title receives monospace styling -->
-  <section class="section pt-14 hero-section">
+  <!-- Opening hero — intro + terminal -->
+  <section class="section pt-14 pb-20 hero-section" id="hero">
     <div class="container">
       <div class="row justify-center">
         <div class="lg:col-7 md:col-9 mb-8 text-center">
-          <h1
+          <!-- Availability badge -->
+          <div class="mb-5 reveal flex justify-center">
+            <span style="display:inline-flex;align-items:center;gap:8px;font-family:ui-monospace,monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;padding:6px 16px;border-radius:20px;border:1px solid rgba(124,58,237,0.3);color:#7c3aed;background:rgba(124,58,237,0.06)">
+              <span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 7px #22c55e;display:inline-block;flex-shrink:0"></span>
+              Disponible · Lima, Perú
+            </span>
+          </div>
+          <h2
             set:html={markdownify(banner.title)}
             class="mb-4 text-h3 lg:text-h1 reveal hero-mono-title"
           />
@@ -98,6 +105,7 @@ const LIGHT_STYLES = [
       const ls = LIGHT_STYLES[index % LIGHT_STYLES.length];
       return (
         <section
+          id={index === 0 ? "trayectoria" : undefined}
           class="section-sm"
           style={`--lbg:${ls.bg};--lborder:${ls.border};--laccent:${ls.accentLine}`}
           data-feature-hud
@@ -109,9 +117,9 @@ const LIGHT_STYLES = [
                 <div
                   class={`mb:md-0 mb-6 md:col-5 reveal ${index % 2 !== 0 && "md:order-2"}`}
                 >
-                  {index === 0 && <BankingFlowDiagram client:visible />}
+                  {index === 0 && <ExperienceTimeline client:visible />}
                   {index === 1 && <TechStackGrid client:visible />}
-                  {index === 2 && <ExperienceTimeline client:visible />}
+                  {index === 2 && <BankingFlowDiagram client:visible />}
                 </div>
                 <div
                   class={`md:col-7 lg:col-6 reveal delay-1 ${index % 2 !== 0 && "md:order-1"}`}
@@ -127,7 +135,7 @@ const LIGHT_STYLES = [
                   <ul>
                     {feature.bulletpoints.map((bullet: string) => (
                       <li class="relative mb-4 pl-6">
-                        <FaCheck className={"absolute left-0 top-1.5 feature-hud-check"} />
+                        <FaCheck aria-hidden={true} className={"absolute left-0 top-1.5 feature-hud-check"} />
                         <span set:html={markdownify(bullet)} />
                       </li>
                     ))}
@@ -154,7 +162,11 @@ const LIGHT_STYLES = [
       <GitHubReposSection client:visible />
     </div>
   </section>
-  <HeroCTA client:load />
+
+  <!-- CTA / contact section -->
+  <div id="contact">
+    <HeroCTA client:visible />
+  </div>
 </Base>
 
 <style is:global>
@@ -203,10 +215,10 @@ const LIGHT_STYLES = [
   }
 
   html:not(.dark) .feature-hud-btn {
-    background: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #60a5fa 100%) !important;
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
     border: none !important;
     color: white !important;
-    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.28) !important;
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.28) !important;
   }
 
   html:not(.dark) .feature-hud-btn:hover {

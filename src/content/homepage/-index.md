@@ -2,30 +2,29 @@
 # Banner
 banner:
   title: "Hola, soy Hrist Bartra"
-  content: "Disfruto crear software, explorar ideas y aprender constantemente. Me motiva analizar problemas complejos y convertirlos en soluciones reales."
+  content: "Senior Backend Engineer · Java, Quarkus & Azure · Más de 6 años construyendo sistemas FinTech de alta disponibilidad."
   image: "/images/banner.png"
   button:
     enable: true
-    label: "Ver Mi LinkedIn"
-    link: "https://www.linkedin.com/in/hrist-joy-bartra-saavedra-09b71913a/"
+    label: "Ver mi trayectoria"
+    link: "#trayectoria"
 
 # Features
 features:
-  - title: "🏦 Experiencia en FinTech & Neobanking"
-    image: "/images/service-1.png"
-    content: "Actualmente en Indra liderando integraciones de core bancario con canales digitales para un Neobanco (Banco por WhatsApp):"
+  - title: "Trayectoria Profesional"
+    image: "/images/service-3.png"
+    content: "Más de 6 años construyendo soluciones en empresas líderes del sector tecnológico y financiero:"
     bulletpoints:
-      - "**Arquitectura BIAN:** APIs robustas bajo estándares bancarios internacionales."
-      - "**Interoperabilidad de Billeteras:** Afiliación/desafiliación (Yape/Mibanco) y transferencias por número de celular."
-      - "**Microservicios con Quarkus:** Pagos entre tarjetas y transferencias interbancarias con Java 17."
-      - "**Azure Data Factory:** Ingesta de datos para flujos de reenganche y automatización en WhatsApp."
-      - "**GitHub Copilot:** Aceleración del ciclo de desarrollo y documentación técnica con OpenAPI."
+      - "**Indra (2023 - Presente):** Senior Backend Engineer — Neobanco & MibancoLab proyectos."
+      - "**Canvia (2022 - 2023):** Analista Programador — Sistema de Perfilamiento de Riesgo (INER)."
+      - "**GLOBAL HITSS (2021 - 2022):** Analista Programador — Sistema SIAC para Claro Perú."
+      - "**REVSA - Grupo Credivargas (2019 - 2021):** Desarrollador — Dashboard KPI y sistemas de gestión."
     button:
-      enable: false
-      label: ""
-      link: "#"
+      enable: true
+      label: "Conoce Más Sobre Mí"
+      link: "/about"
 
-  - title: "🌟 Stack Tecnológico"
+  - title: "Stack Tecnológico"
     image: "/images/service-2.png"
     content: "Especializado en tecnologías modernas para soluciones financieras de alta disponibilidad:"
     bulletpoints:
@@ -39,16 +38,17 @@ features:
       label: ""
       link: "#"
 
-  - title: "💼 Trayectoria Profesional"
-    image: "/images/service-3.png"
-    content: "Más de 6 años construyendo soluciones en empresas líderes del sector tecnológico y financiero:"
+  - title: "Experiencia en FinTech & Neobanking"
+    image: "/images/service-1.png"
+    content: "Actualmente en Indra liderando integraciones de core bancario con canales digitales para un Neobanco (Banco por WhatsApp):"
     bulletpoints:
-      - "**Indra (2023 - Presente):** Senior Backend Engineer — Neobanco & MibancoLab proyectos."
-      - "**Canvia (2022 - 2023):** Analista Programador — Sistema de Perfilamiento de Riesgo (INER)."
-      - "**GLOBAL HITSS (2021 - 2022):** Analista Programador — Sistema SIAC para Claro Perú."
-      - "**REVSA - Grupo Credivargas (2019 - 2021):** Desarrollador — Dashboard KPI y sistemas de gestión."
+      - "**Arquitectura BIAN:** APIs robustas bajo estándares bancarios internacionales."
+      - "**Interoperabilidad de Billeteras:** Afiliación/desafiliación (Yape/Mibanco) y transferencias por número de celular."
+      - "**Microservicios con Quarkus:** Pagos entre tarjetas y transferencias interbancarias con Java 17."
+      - "**Azure Data Factory:** Ingesta de datos para flujos de reenganche y automatización en WhatsApp."
+      - "**GitHub Copilot:** Aceleración del ciclo de desarrollo y documentación técnica con OpenAPI."
     button:
-      enable: true
-      label: "Conoce Más Sobre Mí"
-      link: "/about"
+      enable: false
+      label: ""
+      link: "#"
 ---

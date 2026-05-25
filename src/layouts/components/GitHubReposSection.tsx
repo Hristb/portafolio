@@ -2,10 +2,9 @@
 import React, { useState } from "react";
 
 function useDarkMode() {
-  const [dark, setDark] = React.useState(
-    () => typeof document !== "undefined" && document.documentElement.classList.contains("dark")
-  );
+  const [dark, setDark] = React.useState(false);
   React.useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
     const obs = new MutationObserver(() =>
       setDark(document.documentElement.classList.contains("dark"))
     );
@@ -33,18 +32,6 @@ const REPOS = [
     lang: "Java",
     desc: "Configuración centralizada de servicios en arquitectura de microservicios",
     topics: ["spring-cloud", "microservices", "config"],
-  },
-  {
-    name: "juego-memoria",
-    lang: "HTML",
-    desc: "Memory game web — ejercicio de lógica y manipulación del DOM",
-    topics: ["html", "css", "javascript", "game"],
-  },
-  {
-    name: "books-app",
-    lang: "HTML",
-    desc: "Aplicación de gestión de libros — interfaz y lógica frontend",
-    topics: ["html", "frontend", "crud"],
   },
   {
     name: "portafolio",
@@ -88,7 +75,7 @@ export default function GitHubReposSection() {
           Repositorios Destacados
         </h2>
         <p style={{ fontSize: 15, color: mutedColor, margin: 0, maxWidth: 480, marginInline: "auto" }}>
-          163 contribuciones en el último año · 16 repositorios públicos
+          Proyectos recientes en Java, Quarkus y Astro
         </p>
       </div>
 
@@ -107,6 +94,7 @@ export default function GitHubReposSection() {
               href={`https://github.com/Hristb/${repo.name}`}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${repo.name} en GitHub (abre en nueva pestaña)`}
               onMouseEnter={() => setHovered(repo.name)}
               onMouseLeave={() => setHovered(null)}
               style={{
@@ -134,7 +122,7 @@ export default function GitHubReposSection() {
                 </svg>
                 <p style={{
                   fontFamily: "ui-monospace, monospace", fontSize: 13, fontWeight: 700,
-                  color: isH ? (dark ? "#93c5fd" : "#4f46e5") : (dark ? "rgba(255,255,255,0.85)" : "#3730a3"),
+                  color: isH ? (dark ? "#c4b5fd" : "#7c3aed") : (dark ? "rgba(255,255,255,0.85)" : "#1a0a3c"),
                   margin: 0, transition: "color 0.2s",
                 }}>{repo.name}</p>
               </div>
@@ -150,9 +138,9 @@ export default function GitHubReposSection() {
                   <span key={t} style={{
                     fontFamily: "ui-monospace, monospace", fontSize: 9,
                     padding: "2px 7px", borderRadius: 20,
-                    background: dark ? "rgba(14,165,233,0.1)" : "rgba(14,165,233,0.08)",
-                    border: "1px solid rgba(14,165,233,0.22)",
-                    color: "#0ea5e9", letterSpacing: "0.05em",
+                    background: dark ? "rgba(124,58,237,0.1)" : "rgba(124,58,237,0.07)",
+                    border: dark ? "1px solid rgba(167,139,250,0.28)" : "1px solid rgba(124,58,237,0.22)",
+                    color: dark ? "#a78bfa" : "#7c3aed", letterSpacing: "0.05em",
                   }}>{t}</span>
                 ))}
               </div>
@@ -175,6 +163,7 @@ export default function GitHubReposSection() {
           href="https://github.com/Hristb"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Ver todos los repositorios en GitHub (abre en nueva pestaña)"
           style={{
             display: "inline-flex", alignItems: "center", gap: 8,
             fontFamily: "ui-monospace, monospace", fontSize: 11.5,

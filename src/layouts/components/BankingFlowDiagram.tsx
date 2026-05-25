@@ -2,10 +2,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
 function useDarkMode() {
-  const [dark, setDark] = React.useState(
-    () => typeof document !== "undefined" && document.documentElement.classList.contains("dark")
-  );
+  const [dark, setDark] = React.useState(false);
   React.useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
     const obs = new MutationObserver(() =>
       setDark(document.documentElement.classList.contains("dark"))
     );
@@ -16,14 +15,14 @@ function useDarkMode() {
 }
 
 const NODES = [
-  { id: "wallet",   label: "Billetera",  sub: "Yape / Mibanco",    color: "#7c3aed",
-    icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" },
-  { id: "bian",     label: "API BIAN",   sub: "Estándar bancario",  color: "#0ea5e9",
-    icon: "M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 11.5h-2V13h-2v2.5H9V9h2v2.5h2V9h2v6.5z" },
-  { id: "core",     label: "Core Bank",  sub: "Neobanco Java 17",   color: "#06b6d4",
-    icon: "M4 10v7h3v-7H4zm6.5 0v7h3v-7h-3zM2 22h19v-3H2v3zm15-12v7h3v-7h-3zM11.5 1L2 6v2h19V6l-9.5-5z" },
-  { id: "whatsapp", label: "WhatsApp",   sub: "Canal digital",      color: "#10b981",
+  { id: "whatsapp", label: "WhatsApp",  sub: "Canal digital",     color: "#10b981",
     icon: "M20 10.999h2C22 5.869 18.127 2 12.99 2v2C17.052 4 20 6.943 20 10.999z M13 8c2.103 0 3 .897 3 3h2c0-3.225-1.775-5-5-5v2zm3.422 5.443a1.001 1.001 0 0 0-1.391.043l-2.393 2.461c-.576-.11-1.734-.471-2.926-1.66-1.192-1.193-1.553-2.354-1.66-2.926l2.459-2.394a1 1 0 0 0 .043-1.39L7.859 4.513a1 1 0 0 0-1.391-.087l-2.17 1.861a1 1 0 0 0-.29.649c-.015.25-.301 6.172 4.291 10.766C12.451 21.697 17.591 22 18.7 22c.149 0 .243-.006.271-.008a.99.99 0 0 0 .647-.289l1.86-2.171a1 1 0 0 0-.085-1.39l-3.971-3.699z" },
+  { id: "agents",   label: "Agentes",   sub: "Yape / Mibanco",    color: "#7c3aed",
+    icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" },
+  { id: "bian",     label: "API BIAN",  sub: "Estándar bancario",  color: "#0ea5e9",
+    icon: "M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 11.5h-2V13h-2v2.5H9V9h2v2.5h2V9h2v6.5z" },
+  { id: "core",     label: "Core Bank", sub: "Neobanco Java 17",   color: "#06b6d4",
+    icon: "M4 10v7h3v-7H4zm6.5 0v7h3v-7h-3zM2 22h19v-3H2v3zm15-12v7h3v-7h-3zM11.5 1L2 6v2h19V6l-9.5-5z" },
 ];
 
 const STATS = [
@@ -157,10 +156,10 @@ export default function BankingFlowDiagram() {
           {NODES[active].label} · {NODES[active].sub}
         </p>
         <p style={{ fontSize: 12.5, color: textColor, margin: 0, lineHeight: 1.5 }}>
-          {active === 0 && "Afiliación y desafiliación de billeteras. Transferencias por número de celular hacia cualquier billetera del mercado."}
-          {active === 1 && "APIs robustas bajo el estándar BIAN, asegurando interoperabilidad y escalabilidad del ecosistema financiero."}
-          {active === 2 && "Microservicios con Quarkus y Java 17. Pagos entre tarjetas y transferencias interbancarias de alta disponibilidad."}
-          {active === 3 && "Canal digital de atención bancaria. Flujos de reenganche y automatización con Azure Data Factory (ADF)."}
+          {active === 0 && "Canal digital de atención bancaria. El usuario interactúa con el Neobanco (Banco por WhatsApp) para operaciones bancarias desde su celular."}
+          {active === 1 && "Capa de integración con billeteras digitales. Afiliación y desafiliación de cuentas Yape/Mibanco y transferencias por número de celular."}
+          {active === 2 && "APIs bajo estándar BIAN (Banking Industry Architecture Network), asegurando interoperabilidad y escalabilidad del ecosistema financiero."}
+          {active === 3 && "Microservicios con Quarkus y Java 17. Pagos entre tarjetas, transferencias interbancarias y automatización con Azure Data Factory."}
         </p>
       </div>
 

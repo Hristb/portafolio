@@ -220,6 +220,34 @@ const { title, meta_title, description, image, noindex, canonical } =
         50%       { background-position: 100% 50%; }
       }
 
+      /* ── Skip navigation ─────────────────────────────── */
+      .skip-nav {
+        position: absolute;
+        top: -48px;
+        left: 1rem;
+        padding: 8px 18px;
+        background: #7c3aed;
+        color: #fff;
+        border-radius: 0 0 8px 8px;
+        font-family: ui-monospace, monospace;
+        font-size: 13px;
+        font-weight: 600;
+        z-index: 10000;
+        transition: top 0.15s ease;
+        text-decoration: none;
+      }
+      .skip-nav:focus { top: 0; }
+
+      /* ── Reduced motion ──────────────────────────────── */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
       /* ── Glassmorphism feature cards ─────────────────── */
       .glass-card {
         background: rgba(255, 255, 255, 0.62);
@@ -275,6 +303,7 @@ const { title, meta_title, description, image, noindex, canonical } =
     </style>
   </head>
   <body>
+    <a href="#main-content" class="skip-nav">Saltar al contenido principal</a>
     <TwSizeIndicator />
     <Header />
     <SearchModal client:load />

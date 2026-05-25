@@ -266,10 +266,9 @@ const ARROWS = [
 // UTILS
 // ═══════════════════════════════════════════════════════════════
 function useDark() {
-  const [d, setD] = useState(
-    () => typeof document !== "undefined" && document.documentElement.classList.contains("dark")
-  );
+  const [d, setD] = useState(false);
   useEffect(() => {
+    setD(document.documentElement.classList.contains("dark"));
     const obs = new MutationObserver(() =>
       setD(document.documentElement.classList.contains("dark"))
     );

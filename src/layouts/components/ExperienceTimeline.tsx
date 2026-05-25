@@ -2,10 +2,9 @@
 import React, { useState } from "react";
 
 function useDarkMode() {
-  const [dark, setDark] = React.useState(
-    () => typeof document !== "undefined" && document.documentElement.classList.contains("dark")
-  );
+  const [dark, setDark] = React.useState(false);
   React.useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
     const obs = new MutationObserver(() =>
       setDark(document.documentElement.classList.contains("dark"))
     );
@@ -37,7 +36,7 @@ const EXPERIENCE = [
     role: "Analista Programador",
     period: "abr 2022 – ago 2023",
     duration: "1 año 5 meses",
-    color: "#0ea5e9",
+    color: "#a78bfa",
     active: false,
     projects: ["Sistema de Perfilamiento – INER"],
     tech: ["Java", "Spring Boot", "Oracle", "JUnit", "REST APIs"],
@@ -52,7 +51,7 @@ const EXPERIENCE = [
     role: "Analista Programador",
     period: "oct 2021 – abr 2022",
     duration: "7 meses",
-    color: "#06b6d4",
+    color: "#a78bfa",
     active: false,
     projects: ["SIAC – Sistema de Atención al Cliente – Claro Perú"],
     tech: ["Java", "Spring Boot", "SQL", "Batch Processing", "MySQL"],
@@ -67,7 +66,7 @@ const EXPERIENCE = [
     role: "Desarrollador",
     period: "abr 2019 – nov 2021",
     duration: "2 años 8 meses",
-    color: "#10b981",
+    color: "#a78bfa",
     active: false,
     projects: ["Dashboard KPI Gerencial", "Sistema Helpdesk Open Source", "Sistema Evaluación de Postulantes"],
     tech: ["Java", "Spring Boot", "Angular", "Spring Security", "MySQL"],

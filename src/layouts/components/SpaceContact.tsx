@@ -9,10 +9,9 @@ export interface SocialLink {
 
 // ── Dark-mode detection ───────────────────────────────────────────────────────
 function useDarkMode() {
-  const [dark, setDark] = useState(
-    () => typeof document !== "undefined" && document.documentElement.classList.contains("dark")
-  );
+  const [dark, setDark] = useState(false);
   useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
     const obs = new MutationObserver(() =>
       setDark(document.documentElement.classList.contains("dark"))
     );

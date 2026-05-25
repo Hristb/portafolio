@@ -4,7 +4,7 @@ import NeuralAbout from "./NeuralAbout";
 import CareerJourneyMap, { MobileCareerMap } from "./CareerJourneyMap";
 import { type JNode, NODES, NCOLOR } from "./careerData";
 
-// â”€â”€ Mobile About â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Mobile About 
 function MobileBottomSheet({
   node,
   dark,
@@ -221,12 +221,11 @@ function MobileBottomSheet({
 }
 
 
-// â”€â”€ Dark-mode detection â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Dark-mode detection 
 function useDarkMode() {
-  const [dark, setDark] = useState(
-    () => typeof document !== "undefined" && document.documentElement.classList.contains("dark")
-  );
+  const [dark, setDark] = useState(false);
   useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
     const obs = new MutationObserver(() =>
       setDark(document.documentElement.classList.contains("dark"))
     );
@@ -236,7 +235,7 @@ function useDarkMode() {
   return dark;
 }
 
-// â”€â”€ Themes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Themes 
 const DM = {
   bg: "linear-gradient(160deg, #06051a 0%, #0b0a22 60%, #07071e 100%)",
   outerBorder: "1px solid rgba(124,58,237,0.2)",
@@ -277,7 +276,7 @@ const LM = {
   scanlines: "none",
 };
 
-// â”€â”€ Corner brackets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Corner brackets 
 function CornerBrackets({ color }: { color: string }) {
   const s: React.CSSProperties = { position: "absolute", width: 14, height: 14, pointerEvents: "none" };
   return (
@@ -290,7 +289,7 @@ function CornerBrackets({ color }: { color: string }) {
   );
 }
 
-// â”€â”€ Desktop static data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Desktop static data 
 const SKILLS_DESKTOP = [
   { cat: "Backend",       color: "#0ea5e9", items: ["Java 17", "Quarkus", "Spring Boot", "APIs REST", "BIAN"] },
   { cat: "Cloud & DevOps",color: "#06b6d4", items: ["Azure", "Docker", "Kubernetes", "CI/CD", "ADF"] },
@@ -305,7 +304,7 @@ const EXPERIENCE_DESKTOP = [
   { company: "REVSA â€“ Credivargas",role: "Desarrollador",            period: "abr 2019 â€“ nov 2021",  color: "#10b981", live: false },
 ];
 
-// â”€â”€ Desktop Profile Panel (LEFT column) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Desktop Profile Panel (LEFT column) 
 function DesktopProfilePanel({ dark, T, activeNode, onClearNode }: {
   dark: boolean;
   T: typeof DM;
@@ -678,7 +677,7 @@ function DesktopProfilePanel({ dark, T, activeNode, onClearNode }: {
   );
 }
 
-// â”€â”€ Main â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  Main 
 export default function SpaceAbout() {
   const dark = useDarkMode();
   const T = dark ? DM : LM;
@@ -750,7 +749,7 @@ export default function SpaceAbout() {
         />
       )}
 
-      {/* â”€â”€ MOBILE LAYOUT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
+      {/*  MOBILE LAYOUT  */}
       {isMobile ? (
         <>
           {/* Compact mobile header */}
