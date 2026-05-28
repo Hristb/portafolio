@@ -199,40 +199,40 @@ const RAINBOW = [
 
 // ── Gamification ──────────────────────────────────────────────────────────────
 const RANKS = [
-  { min: 1000, label: "ADMIRAL",   stars: 5 },
-  { min: 700,  label: "COMMANDER", stars: 4 },
-  { min: 400,  label: "PILOT",     stars: 3 },
-  { min: 200,  label: "NAVIGATOR", stars: 2 },
-  { min: 0,    label: "CADET",     stars: 1 },
+  { min: 1000, label: "ALMIRANTE",  stars: 5 },
+  { min: 700,  label: "COMANDANTE", stars: 4 },
+  { min: 400,  label: "PILOTO",     stars: 3 },
+  { min: 200,  label: "NAVEGANTE",  stars: 2 },
+  { min: 0,    label: "CADETE",     stars: 1 },
 ] as const;
 
 const ACHIEVEMENTS = [
   {
     id: "first_contact",
     icon: "◉",
-    label: "FIRST CONTACT",
-    desc: "Opened your first mission",
+    label: "PRIMER CONTACTO",
+    desc: "Abrió tu primera misión",
     check: (explored: Set<string>) => explored.size >= 1,
   },
   {
     id: "navigator",
     icon: "◈",
-    label: "NAVIGATOR",
-    desc: "Explored 3 missions",
+    label: "NAVEGANTE",
+    desc: "Exploró 3 misiones",
     check: (explored: Set<string>) => explored.size >= 3,
   },
   {
     id: "full_clearance",
     icon: "◆",
-    label: "FULL CLEARANCE",
-    desc: "All missions explored",
+    label: "AUTORIZACIÓN COMPLETA",
+    desc: "Todas las misiones exploradas",
     check: (explored: Set<string>, total: number) => total > 0 && explored.size >= total,
   },
   {
     id: "specialist",
     icon: "▣",
-    label: "SPECIALIST",
-    desc: "Two missions from same category",
+    label: "ESPECIALISTA",
+    desc: "Dos misiones de la misma categoría",
     check: (explored: Set<string>, _total: number, missions: Mission[]) => {
       const freq: Record<string, number> = {};
       missions
@@ -301,7 +301,7 @@ function StatusDot({ active, T }: { active: boolean; T: typeof DM | typeof LM })
   return (
     <span style={{ display: "inline-flex", alignItems: "center", gap: 6, fontFamily: "monospace", fontSize: 11, letterSpacing: "0.15em", color: active ? T.statusActive : T.statusInactive }}>
       <span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", backgroundColor: active ? T.statusActive : T.statusInactive, boxShadow: active && T === DM ? `0 0 6px ${T.statusActive}` : "none" }} />
-      {active ? "ACTIVE" : "ARCHIVED"}
+      {active ? "ACTIVO" : "ARCHIVADO"}
     </span>
   );
 }
@@ -426,10 +426,10 @@ export default function SpaceMissions({
       >
         <div>
           <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.3em", color: T.eyebrow, margin: 0, marginBottom: 4 }}>
-            MISSION CONTROL · SECTOR 7
+            PUBLICACIONES · BACKEND & FINTECH
           </p>
           <h2 style={{ fontFamily: "monospace", fontWeight: 700, fontSize: "clamp(1rem, 2.5vw, 1.25rem)", margin: 0, color: T.text, letterSpacing: "0.06em" }}>
-            PROJECT LOG
+            REGISTRO DE ARTÍCULOS
             <span style={{ opacity: blink ? 1 : 0, transition: "opacity 0.1s" }}>_</span>
           </h2>
         </div>
@@ -461,8 +461,8 @@ export default function SpaceMissions({
       >
         {[
           { id: "hangar" as View, icon: "◉", label: "HANGAR", badge: missions.length, disabled: false },
-          { id: "brief" as View, icon: "◈", label: "MISSION", badge: null, disabled: !selectedId },
-          { id: "pilot" as View, icon: "◆", label: "PILOT LOG", badge: unlockedAchievements.length || null, disabled: false, badgeIsAch: true },
+          { id: "brief" as View, icon: "◈", label: "MISIÓN", badge: null, disabled: !selectedId },
+          { id: "pilot" as View, icon: "◆", label: "REGISTRO DE PILOTO", badge: unlockedAchievements.length || null, disabled: false, badgeIsAch: true },
         ].map((tab) => {
           const active = view === tab.id;
           return (
@@ -496,7 +496,7 @@ export default function SpaceMissions({
           );
         })}
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", paddingRight: 20, fontFamily: "monospace", fontSize: 10, letterSpacing: "0.15em", color: T.exploredCounter, whiteSpace: "nowrap" }}>
-          {explored.size}/{missions.length} EXPLORED
+          {explored.size}/{missions.length} EXPLORADO
         </div>
       </div>
 
@@ -509,7 +509,7 @@ export default function SpaceMissions({
             {missions.length === 0 ? (
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", paddingTop: 80, paddingBottom: 80 }}>
                 <p style={{ fontFamily: "monospace", fontSize: 12, letterSpacing: "0.3em", color: T.textFaint }}>
-                  NO MISSIONS CATALOGUED
+                  SIN MISIONES REGISTRADAS
                 </p>
               </div>
             ) : (
@@ -580,7 +580,7 @@ export default function SpaceMissions({
                           <span style={{ fontFamily: "monospace", fontSize: 11, color: T.green }}>+{xp}XP</span>
                         </div>
                         <span style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.2em", color: isHov ? T.launchColorHov : T.launchColor, transition: "color 0.2s" }}>
-                          LAUNCH →
+                          ABRIR →
                         </span>
                       </div>
                     </div>
@@ -605,7 +605,7 @@ export default function SpaceMissions({
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.6")}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
-              ← RETURN TO HANGAR
+              ← VOLVER AL HANGAR
             </button>
 
             <div
@@ -631,11 +631,11 @@ export default function SpaceMissions({
               </h2>
 
               <p style={{ fontSize: 13, lineHeight: 1.7, color: T.descColor, marginBottom: 20 }}>
-                {selectedMission.description || "No briefing available."}
+                {selectedMission.description || "Sin descripción disponible."}
               </p>
 
               <div style={{ marginBottom: 20 }}>
-                <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.3em", color: T.statColor, marginBottom: 10 }}>TECH MANIFEST</p>
+                <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.3em", color: T.statColor, marginBottom: 10 }}>MANIFIESTO TÉCNICO</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {[...selectedMission.categories, ...selectedMission.tags].map((t) => (
                     <span key={t} style={{ fontFamily: "monospace", fontSize: 11, padding: "4px 12px", borderRadius: 4, color: T.tagManifestColor, background: T.tagManifestBg, border: `1px solid ${T.tagManifestBorder}`, letterSpacing: "0.05em" }}>
@@ -647,21 +647,21 @@ export default function SpaceMissions({
 
               <div style={{ display: "flex", alignItems: "flex-start", gap: 28, paddingTop: 16, borderTop: `1px solid ${T.divider}`, flexWrap: "wrap" }}>
                 <div>
-                  <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.3em", color: T.statColor, marginBottom: 6 }}>SIGNAL</p>
+                  <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.3em", color: T.statColor, marginBottom: 6 }}>SEÑAL</p>
                   <SignalBars strength={Math.min(selectedMission.tags.length, 5)} T={T} />
                 </div>
                 <div>
-                  <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.3em", color: T.statColor, marginBottom: 4 }}>MISSION XP</p>
+                  <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.3em", color: T.statColor, marginBottom: 4 }}>XP DE MISIÓN</p>
                   <p style={{ fontFamily: "monospace", fontSize: 16, fontWeight: 700, color: T.green, margin: 0, textShadow: dark ? `0 0 10px ${T.green}` : "none" }}>
                     +{getMissionXP(selectedMission)}
                   </p>
                 </div>
                 <div>
-                  <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.3em", color: T.statColor, marginBottom: 4 }}>AUTHOR</p>
+                  <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.3em", color: T.statColor, marginBottom: 4 }}>AUTOR</p>
                   <p style={{ fontFamily: "monospace", fontSize: 12, color: T.textMuted, margin: 0 }}>{selectedMission.author}</p>
                 </div>
                 <div>
-                  <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.3em", color: T.statColor, marginBottom: 4 }}>YEAR</p>
+                  <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.3em", color: T.statColor, marginBottom: 4 }}>AÑO</p>
                   <p style={{ fontFamily: "monospace", fontSize: 12, color: T.textMuted, margin: 0 }}>{new Date(selectedMission.date).getFullYear()}</p>
                 </div>
               </div>
@@ -680,7 +680,7 @@ export default function SpaceMissions({
               onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.9"; e.currentTarget.style.transform = "scale(1.01)"; e.currentTarget.style.boxShadow = T.btnShadowHov; }}
               onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = T.btnShadow; }}
             >
-              OPEN TRANSMISSION →
+              LEER ARTÍCULO →
             </a>
           </div>
         )}
@@ -693,7 +693,7 @@ export default function SpaceMissions({
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: T.accentLine, opacity: T.accentLineOpacity, borderRadius: "14px 14px 0 0" }} />
 
               <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.35em", color: T.textFaint, marginBottom: 6 }}>
-                // CLASSIFIED RECORD //
+                // REGISTRO CLASIFICADO //
               </p>
 
               <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
@@ -713,7 +713,7 @@ export default function SpaceMissions({
 
               <div style={{ marginTop: 20 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                  <span style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.2em", color: T.textMuted }}>MISSION PROGRESS</span>
+                  <span style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.2em", color: T.textMuted }}>PROGRESO</span>
                   <span style={{ fontFamily: "monospace", fontSize: 10, color: T.textMuted }}>{explored.size} / {missions.length}</span>
                 </div>
                 <div style={{ width: "100%", height: 6, borderRadius: 99, background: T.progressBg, overflow: "hidden" }}>
@@ -724,7 +724,7 @@ export default function SpaceMissions({
 
             {/* Tech Arsenal */}
             <div style={{ marginBottom: 20 }}>
-              <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.28em", color: T.statColor, marginBottom: 12 }}>// TECH ARSENAL //</p>
+              <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.28em", color: T.statColor, marginBottom: 12 }}>// ARSENAL TÉCNICO //</p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                 {(() => {
                   const freq: Record<string, number> = {};
@@ -745,7 +745,7 @@ export default function SpaceMissions({
 
             {/* Achievements */}
             <div>
-              <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.28em", color: T.statColor, marginBottom: 12 }}>// ACHIEVEMENTS //</p>
+              <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.28em", color: T.statColor, marginBottom: 12 }}>// LOGROS //</p>
               <div style={{ display: "grid", gap: 10, gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 260px), 1fr))" }}>
                 {ACHIEVEMENTS.map((ach) => {
                   const unlocked = unlockedAchievements.some((u) => u.id === ach.id);

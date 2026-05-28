@@ -13,14 +13,14 @@ export const ui: Record<Lang, Record<string, string>> = {
   es: {
     "nav.home": "Inicio",
     "nav.about": "Sobre Mí",
-    "nav.projects": "Proyectos",
+    "nav.articles": "Artículos",
     "nav.contact": "Contacto",
     "nav.cta": "Contáctame",
   },
   en: {
     "nav.home": "Home",
     "nav.about": "About Me",
-    "nav.projects": "Projects",
+    "nav.articles": "Articles",
     "nav.contact": "Contact",
     "nav.cta": "Contact Me",
   },

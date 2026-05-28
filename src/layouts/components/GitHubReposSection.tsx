@@ -65,7 +65,7 @@ export default function GitHubReposSection() {
           letterSpacing: "0.35em", color: "#7c3aed",
           margin: "0 0 10px", textTransform: "uppercase",
         }}>
-          Open Source · github.com/Hristb
+          Código Abierto · github.com/Hristb
         </p>
         <h2 style={{
           fontFamily: "ui-monospace, monospace", fontWeight: 700,
