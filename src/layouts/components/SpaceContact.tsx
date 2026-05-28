@@ -241,10 +241,10 @@ export default function SpaceContact({
   };
 
   const FIELDS = [
-    { key: "name",    label: "Full name",       type: "text",     required: true },
-    { key: "email",   label: "Email",            type: "email",    required: true },
-    { key: "subject", label: "Subject",          type: "text" },
-    { key: "message", label: "Tell me your idea", type: "textarea", required: true },
+    { key: "name",    label: "Nombre completo",       type: "text",     required: true },
+    { key: "email",   label: "Correo",            type: "email",    required: true },
+    { key: "subject", label: "Asunto",          type: "text" },
+    { key: "message", label: "Cuéntame tu idea", type: "textarea", required: true },
   ];
 
   return (
@@ -291,10 +291,10 @@ export default function SpaceContact({
         }}
       >
         <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.3em", color: T.eyebrow, margin: 0, marginBottom: 4 }}>
-          TRANSMISSION CHANNEL · OPEN
+          CANAL DE CONTACTO · ABIERTO
         </p>
         <h2 style={{ fontFamily: "monospace", fontWeight: 700, fontSize: "clamp(1rem, 2.5vw, 1.2rem)", margin: 0, color: T.text, letterSpacing: "0.06em" }}>
-          ESTABLISH CONTACT
+          ESTABLECER CONTACTO
           <span style={{ opacity: blink ? 1 : 0, transition: "opacity 0.1s" }}>_</span>
         </h2>
       </div>
@@ -340,7 +340,7 @@ export default function SpaceContact({
             }}
           >
             <span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", backgroundColor: T.green, boxShadow: dark ? `0 0 7px ${T.green}` : "none" }} />
-            AVAILABLE
+            DISPONIBLE
           </div>
 
           {/* Info items */}
@@ -349,7 +349,7 @@ export default function SpaceContact({
               icon: (
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               ),
-              label: "EMAIL",
+              label: "CORREO",
               value: "hristbartra@gmail.com",
               href: "mailto:hristbartra@gmail.com",
             },
@@ -357,15 +357,15 @@ export default function SpaceContact({
               icon: (
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
               ),
-              label: "LOCATION",
-              value: "Lima, Peru",
+              label: "UBICACIÓN",
+              value: "Lima, Perú",
             },
             {
               icon: (
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               ),
-              label: "STATUS",
-              value: "Freelance · Full-time",
+              label: "ESTADO",
+              value: "Freelance · Tiempo completo",
             },
           ].map((item) => (
             <div key={item.label} style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 20 }}>
@@ -411,7 +411,7 @@ export default function SpaceContact({
           {/* Divider + socials */}
           <div style={{ height: 1, background: T.divider, margin: "8px 0 20px" }} />
           <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.3em", color: T.socialLabel, marginBottom: 12 }}>
-            FIND ME AT
+          ENCÚENTRAME EN
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
             {socials.map((s) => {
@@ -458,7 +458,7 @@ export default function SpaceContact({
               }}
             >
               <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.28em", color: T.cyan, opacity: 0.8, margin: 0, marginBottom: 6 }}>
-                RESPONSE TIME
+                TIEMPO DE RESPUESTA
               </p>
               <p style={{ fontFamily: "monospace", fontSize: 18, fontWeight: 700, color: T.cyan, margin: 0, textShadow: dark ? `0 0 14px rgba(14,165,233,0.4)` : "none", lineHeight: 1 }}>
                 &lt;24h
@@ -519,7 +519,7 @@ export default function SpaceContact({
             {/* Message */}
             <div style={{ position: "relative", marginBottom: 20 }}>
               <p style={{ fontFamily: "monospace", fontSize: 9, letterSpacing: "0.25em", color: T.fieldLabel, marginBottom: 8 }}>
-                TELL ME YOUR IDEA
+                CUÉNTAME TU IDEA
                 <span style={{ color: dark ? "#f87171" : "#dc2626", marginLeft: 4 }}>*</span>
               </p>
               <div style={{ position: "relative" }}>
@@ -571,10 +571,10 @@ export default function SpaceContact({
               }}
             >
               {status === "sending"
-                ? "TRANSMITTING..."
+                ? "ENVIANDO..."
                 : status === "ok"
-                ? "TRANSMISSION SENT ✓"
-                : "SEND TRANSMISSION →"}
+                ? "MENSAJE ENVIADO ✓"
+                : "ENVIAR MENSAJE →"}
             </button>
 
             {/* Error feedback */}
@@ -592,7 +592,7 @@ export default function SpaceContact({
                   letterSpacing: "0.08em",
                 }}
               >
-                TRANSMISSION FAILED. Try again or contact directly.
+                ERROR AL ENVIAR. Inténtalo de nuevo o escríbeme directamente.
               </div>
             )}
           </form>

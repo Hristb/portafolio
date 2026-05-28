@@ -28,25 +28,39 @@ let {
   style,
 } = Astro.props;
 
-src = `/public${src}`;
+// Handle external URLs (http/https) directly with a plain <img> tag
+const isExternal = src.startsWith("http://") || src.startsWith("https://");
+
+const localSrc = `/public${src}`;
 
 // Glob pattern to load images from the /public/images folder
 const images = import.meta.glob("/public/images/**/*.{jpeg,jpg,png,gif}");
 
 // Check if the source path is valid
-const isValidPath = images[src] ? true : false;
+const isValidPath = !isExternal && (images[localSrc] ? true : false);
 
 // Log a warning message in red if the image is not found
-!isValidPath &&
+!isExternal && !isValidPath &&
   console.error(
-    `\x1b[31mImage not found - ${src}.\x1b[0m Make sure the image is in the /public/images folder.`,
+    `\x1b[31mImage not found - ${localSrc}.\x1b[0m Make sure the image is in the /public/images folder.`,
   );
 ---
 
 {
-  isValidPath && (
+  isExternal ? (
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading ?? "lazy"}
+      decoding={decoding ?? "async"}
+      class={className}
+      style={style}
+    />
+  ) : isValidPath && (
     <Image
-      src={images[src]() as Promise<{ default: ImageMetadata }>}
+      src={images[localSrc]() as Promise<{ default: ImageMetadata }>}
       alt={alt}
       width={width}
       height={height}

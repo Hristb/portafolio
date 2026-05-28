@@ -166,7 +166,7 @@ export default function HeroIntro() {
         letterSpacing: "0.08em",
         margin: "0 auto 28px",
       }}>
-        github copilot · daily workflow since 2024
+        github copilot · uso diario desde 2024
       </p>
 
       {/* Buttons */}
@@ -177,7 +177,7 @@ export default function HeroIntro() {
           style={btnPrimary}
         >
           <GitHubIcon />
-          Repos
+          Repositorios
         </a>
         <a
           href="https://www.linkedin.com/in/hrist-joy-bartra-saavedra-09b71913a/"
