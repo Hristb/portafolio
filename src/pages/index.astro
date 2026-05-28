@@ -1,24 +1,18 @@
 ---
 import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
-import type { Button, Feature } from "@/types";
+import type { Feature } from "@/types";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 import { FaCheck } from "react-icons/fa";
-import HeroTerminal from "@/components/HeroTerminal";
+import HeroIntro from "@/components/HeroIntro";
 import BankingFlowDiagram from "@/components/BankingFlowDiagram";
 import TechStackGrid from "@/components/TechStackGrid";
 import ExperienceTimeline from "@/components/ExperienceTimeline";
 import GitHubReposSection from "@/components/GitHubReposSection";
-import HeroCTA from "@/components/HeroCTA";
+
 
 interface Homepage {
-  banner: {
-    title: string;
-    content: string;
-    image: string;
-    button: Button;
-  };
   features: Feature[];
 }
 
@@ -34,7 +28,7 @@ const homepageFallback = (await getEntry(
 
 const homepage = homepageEn ?? homepageFallback;
 
-const { banner, features } = homepage.data as Homepage;
+const { features } = homepage.data as Homepage;
 
 // Per-feature light-mode — unified violet/purple family
 const LIGHT_STYLES = [
@@ -57,43 +51,12 @@ const LIGHT_STYLES = [
 ---
 
 <Base>
-  <!-- Opening hero — intro + terminal -->
-  <section class="section pt-14 pb-20 hero-section" id="hero">
+  <!-- Hero — minimal intro -->
+  <section class="section pt-14 pb-16" id="hero">
     <div class="container">
       <div class="row justify-center">
-        <div class="lg:col-7 md:col-9 mb-8 text-center">
-          <!-- Availability badge -->
-          <div class="mb-5 reveal flex justify-center">
-            <span style="display:inline-flex;align-items:center;gap:8px;font-family:ui-monospace,monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;padding:6px 16px;border-radius:20px;border:1px solid rgba(124,58,237,0.3);color:#7c3aed;background:rgba(124,58,237,0.06)">
-              <span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 7px #22c55e;display:inline-block;flex-shrink:0"></span>
-              Disponible · Lima, Perú
-            </span>
-          </div>
-          <h2
-            set:html={markdownify(banner.title)}
-            class="mb-4 text-h3 lg:text-h1 reveal hero-mono-title"
-          />
-          <p
-            set:html={markdownify(banner.content)}
-            class="mb-8 reveal delay-1"
-          />
-          {
-            banner.button.enable && (
-              <a
-                class="btn btn-primary reveal delay-2"
-                href={banner.button.link}
-                target={
-                  banner.button.link.startsWith("http") ? "_blank" : "_self"
-                }
-                rel="noopener noreferrer"
-              >
-                {banner.button.label}
-              </a>
-            )
-          }
-        </div>
-        <div class="col-12 reveal delay-3">
-          <HeroTerminal client:load />
+        <div class="col-12 reveal">
+          <HeroIntro client:load />
         </div>
       </div>
     </div>
@@ -163,10 +126,7 @@ const LIGHT_STYLES = [
     </div>
   </section>
 
-  <!-- CTA / contact section -->
-  <div id="contact">
-    <HeroCTA client:visible />
-  </div>
+
 </Base>
 
 <style is:global>

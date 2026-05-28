@@ -26,9 +26,9 @@ const NODES = [
 ];
 
 const STATS = [
-  { label: "Tiempo resp.", value: "<120ms",  unit: "promedio API" },
+  { label: "Tiempo resp.", value: "<120ms",  unit: "promedio API BIAN" },
   { label: "Uptime",       value: "99.9%",   unit: "SLA garantizado" },
-  { label: "Estándar",     value: "BIAN",    unit: "arquitectura bancaria" },
+  { label: "Estándar",     value: "BIAN",    unit: "+ AI SDD + ELK" },
 ];
 
 export default function BankingFlowDiagram() {

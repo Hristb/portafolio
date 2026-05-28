@@ -94,15 +94,15 @@ export const NODES: JNode[] = [
   {
     id: "waba", num: 13, x: 232, y: 372, type: "milestone",
     label: "Banco × WhatsApp", icon: "📱", period: "2024 – hoy",
-    desc: "Core técnico de un banco 100% operado por WhatsApp. Transacciones en tiempo real, BIAN compliant, Quarkus en producción.",
-    tags: ["WhatsApp API", "Quarkus", "BIAN", "Real-time"],
+    desc: "Core técnico de un banco 100% operado por WhatsApp. APIs BIAN multicapa, Quarkus en producción, monitoreo con ELK Stack y desarrollo impulsado por IA con SDD + GitHub Copilot.",
+    tags: ["WhatsApp API", "Quarkus", "BIAN", "ELK", "AI SDD"],
   },
   {
     id: "indra", num: 14, x: 432, y: 293, type: "job",
     live: true,
-    label: "Indra", icon: "🚀", period: "ago 2023 – Presente",
-    desc: "Senior Backend Engineer. FinTech bancario, arquitectura BIAN, Quarkus, Azure. El punto más alto del camino hasta ahora — y el próximo está por llegar.",
-    tags: ["Senior", "Java 17", "Quarkus", "BIAN", "Azure"],
+    label: "Indra · MiBanco", icon: "🚀", period: "ago 2023 – Presente",
+    desc: "Senior Backend Engineer en Nuevos Modelos Digitales MiBanco. Neobanco (Banco por WhatsApp), BIAN, Quarkus, Angular, Azure, ELK, SDD con GitHub Copilot. Fullstack en el ecosistema MiBancoLab: Academia de Progreso, YEVO, Puntos y Referidos.",
+    tags: ["Senior", "Java 17", "Quarkus", "BIAN", "Angular", "AI SDD", "ELK"],
   },
 ];
 

@@ -46,14 +46,16 @@ function useTypewriter(texts: string[], speed = 55, pause = 1800) {
 
 // ── Terminal lines (full-stack: backend + frontend + devops) ────────────────
 const LINES = [
-  { delay: 200,  text: "$ quarkus build --native --no-tests",      color: "#e2e8f0" },
-  { delay: 1000, text: "\u2713  BUILD SUCCESS  [2.3s]",                  color: "#4ade80" },
-  { delay: 1600, text: "$ ng build --configuration=production",     color: "#e2e8f0" },
-  { delay: 2400, text: "\u2713  Browser bundles \u2014 287 KB gzipped",       color: "#4ade80" },
-  { delay: 3000, text: "$ kubectl apply -f k8s/deploy.yaml",        color: "#e2e8f0" },
-  { delay: 3800, text: "\u2713  3/3 pods Running \u2014 namespace: neobank",  color: "#4ade80" },
-  { delay: 4400, text: "$ curl /api/bian/v1/payments/credit-transfer", color: "#e2e8f0" },
-  { delay: 5200, text: '{"status":"ACSC","txnId":"TXN-98213","ms":87}', color: "#67e8f9" },
+  { delay: 200,  text: "$ quarkus build --native --no-tests",             color: "#e2e8f0" },
+  { delay: 1000, text: "\u2713  BUILD SUCCESS  [2.3s]",                        color: "#4ade80" },
+  { delay: 1600, text: "$ ng build --configuration=production",            color: "#e2e8f0" },
+  { delay: 2400, text: "\u2713  Browser bundles \u2014 287 KB gzipped",                color: "#4ade80" },
+  { delay: 3000, text: "$ kubectl apply -f k8s/deploy.yaml",               color: "#e2e8f0" },
+  { delay: 3800, text: "\u2713  3/3 pods Running \u2014 namespace: neobank",           color: "#4ade80" },
+  { delay: 4400, text: "$ curl /api/bian/v1/payments/credit-transfer",     color: "#e2e8f0" },
+  { delay: 5200, text: '{"status":"ACSC","txnId":"TXN-98213","ms":87}',    color: "#67e8f9" },
+  { delay: 5900, text: "$ copilot sdd --spec=neobanco.spec.md --gen",      color: "#e2e8f0" },
+  { delay: 6700, text: "\u2713  SDD plan generated \u2014 12 microservices scoped",     color: "#4ade80" },
 ];
 
 // Two-color system: backend = violet, cloud/infra = cyan
@@ -62,15 +64,18 @@ const BADGES = [
   { label: "Java 17",     cat: "backend" },
   { label: "Quarkus",     cat: "backend" },
   { label: "Spring Boot", cat: "backend" },
+  { label: "Angular",     cat: "backend" },
   { label: "Azure",       cat: "cloud" },
   { label: "Docker",      cat: "cloud" },
   { label: "BIAN",        cat: "backend" },
-  { label: "Angular",     cat: "backend" },
+  { label: "AI SDD",      cat: "backend" },
+  { label: "ELK",         cat: "cloud" },
 ];
 
 const ROLES = [
   "Senior Backend Engineer",
-  "Full-Stack Developer",
+  "FinTech & Neobanking Architect",
+  "AI-Driven Full-Stack Developer",
   "Systems Engineer",
 ];
 

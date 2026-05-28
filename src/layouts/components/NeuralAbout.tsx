@@ -60,9 +60,9 @@ const NODES: NodePayload[] = [
     category: "core",
     color: CAT_COLOR.core,
     description:
-      "Senior Backend Engineer con 6+ años en FinTech y Neobanking. Microservicios bajo estándares BIAN, Java 17 y Quarkus como herramientas de impacto real en el sector financiero.",
+      "Senior Backend Engineer con 6+ años en FinTech y Neobanking. Microservicios bajo estándares BIAN, Java 17 y Quarkus en producción. Desarrollo AI-driven con GitHub Copilot y metodología SDD. Fullstack en el ecosistema MiBancoLab.",
     descriptionEn:
-      "Senior Backend Engineer with 6+ years in FinTech and Neobanking. Microservices under BIAN standards, Java 17 and Quarkus as tools of real impact in the financial sector.",
+      "Senior Backend Engineer with 6+ years in FinTech and Neobanking. Microservices under BIAN standards, Java 17 and Quarkus in production. AI-driven development with GitHub Copilot and SDD methodology. Fullstack in the MiBancoLab ecosystem.",
     connections: [...PRIMARY_IDS],
   },
   {
@@ -108,9 +108,9 @@ const NODES: NodePayload[] = [
     category: "primary",
     color: CAT_COLOR.innovation,
     description:
-      "Exploración continua de tecnologías emergentes. IA, Edge Computing y nuevas formas de construir productos con impacto real.",
+      "Desarrollo impulsado por IA: GitHub Copilot con Prompt Engineering avanzado y SDD (Spec-Driven Development) como metodología de trabajo. Monitoreo de incidencias con ELK Stack. Integraciones con ChatBot Botmaker y Azure Personalizer.",
     descriptionEn:
-      "Continuous exploration of emerging technologies. AI, Edge Computing and new ways to build products with real impact.",
+      "AI-driven development: GitHub Copilot with advanced Prompt Engineering and SDD (Spec-Driven Development) as work methodology. Incident monitoring with ELK Stack. Integrations with ChatBot Botmaker and Azure Personalizer.",
     connections: TECH_MAP.innovation,
   },
   {

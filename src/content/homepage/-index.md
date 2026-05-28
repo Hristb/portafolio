@@ -15,7 +15,7 @@ features:
     image: "/images/service-3.png"
     content: "Más de 6 años construyendo soluciones en empresas líderes del sector tecnológico y financiero:"
     bulletpoints:
-      - "**Indra (2023 - Presente):** Senior Backend Engineer — Neobanco & MibancoLab proyectos."
+      - "**Indra · MiBanco (2023 - Presente):** Senior Backend Engineer — Neobanco (Banco por WhatsApp), MiBancoLab, Academia de Progreso, YEVO, Puntos y Referidos."
       - "**Canvia (2022 - 2023):** Analista Programador — Sistema de Perfilamiento de Riesgo (INER)."
       - "**GLOBAL HITSS (2021 - 2022):** Analista Programador — Sistema SIAC para Claro Perú."
       - "**REVSA - Grupo Credivargas (2019 - 2021):** Desarrollador — Dashboard KPI y sistemas de gestión."
@@ -33,20 +33,22 @@ features:
       - "**Bases de Datos:** MySQL, Oracle, SQL y MongoDB."
       - "**Frontend:** Angular, TypeScript, SCSS y TailwindCSS."
       - "**Seguridad:** Spring Security, OAuth2, JWT y autenticación basada en tokens."
+      - "**Workflow:** GitHub Copilot (uso diario desde 2024), metodología SDD y OpenAPI para documentación automática."
     button:
       enable: false
       label: ""
       link: "#"
 
-  - title: "Experiencia en FinTech & Neobanking"
+  - title: "FinTech & Neobanking"
     image: "/images/service-1.png"
-    content: "Actualmente en Indra liderando integraciones de core bancario con canales digitales para un Neobanco (Banco por WhatsApp):"
+    content: "Actualmente en Indra — Nuevos Modelos Digitales MiBanco — construyendo el Neobanco (Banco por WhatsApp) bajo estándares BIAN:"
     bulletpoints:
-      - "**Arquitectura BIAN:** APIs robustas bajo estándares bancarios internacionales."
+      - "**Arquitectura BIAN:** APIs y microservicios para conectar el canal digital al core bancario bajo estándares bancarios internacionales."
       - "**Interoperabilidad de Billeteras:** Afiliación/desafiliación (Yape/Mibanco) y transferencias por número de celular."
       - "**Microservicios con Quarkus:** Pagos entre tarjetas y transferencias interbancarias con Java 17."
-      - "**Azure Data Factory:** Ingesta de datos para flujos de reenganche y automatización en WhatsApp."
-      - "**GitHub Copilot:** Aceleración del ciclo de desarrollo y documentación técnica con OpenAPI."
+      - "**Azure Data Factory:** Cargas masivas, ingesta de datos y automatización de flujos en WhatsApp."
+      - "**ELK Stack:** Monitoreo y análisis de incidencias en producción (Elasticsearch, Logstash, Kibana)."
+      - "**Fullstack MiBancoLab:** Angular + microservicios + Azure Functions para Academia de Progreso, YEVO y Programa de Puntos y Referidos."
     button:
       enable: false
       label: ""
