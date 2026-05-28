@@ -21,6 +21,7 @@ const TECH = {
     { name: "Spring Boot",     pct: 92, color: "#6cbd45", years: "5 años" },
     { name: "Spring Security", pct: 85, color: "#22c55e", years: "4 años" },
     { name: "REST / APIs",     pct: 96, color: "#f97316", years: "6 años" },
+    { name: "Node.js",         pct: 72, color: "#339933", years: "2 años" },
   ],
   Cloud: [
     { name: "Microsoft Azure",  pct: 82, color: "#0ea5e9", years: "3 años" },
@@ -28,6 +29,8 @@ const TECH = {
     { name: "Kubernetes",       pct: 70, color: "#326ce5", years: "2 años" },
     { name: "Azure DevOps",     pct: 80, color: "#0078d4", years: "3 años" },
     { name: "GitHub Actions",   pct: 78, color: "#a78bfa", years: "2 años" },
+    { name: "ELK Stack",        pct: 74, color: "#f4b942", years: "2 años" },
+    { name: "SonarCloud",       pct: 75, color: "#f3702a", years: "2 años" },
   ],
   Frontend: [
     { name: "Angular",       pct: 82, color: "#dd0031", years: "4 años" },
@@ -36,10 +39,11 @@ const TECH = {
     { name: "TailwindCSS",   pct: 72, color: "#38bdf8", years: "2 años" },
   ],
   DB: [
-    { name: "MySQL",   pct: 88, color: "#4479a1", years: "6 años" },
-    { name: "Oracle",  pct: 82, color: "#f80000", years: "4 años" },
-    { name: "MongoDB", pct: 70, color: "#47a248", years: "3 años" },
-    { name: "SQL",     pct: 92, color: "#a78bfa", years: "6 años" },
+    { name: "MySQL",     pct: 88, color: "#4479a1", years: "6 años" },
+    { name: "Oracle",   pct: 82, color: "#f80000", years: "4 años" },
+    { name: "MongoDB",  pct: 70, color: "#47a248", years: "3 años" },
+    { name: "SQL",      pct: 92, color: "#a78bfa", years: "6 años" },
+    { name: "Azure SQL", pct: 80, color: "#0078d4", years: "3 años" },
   ],
 } as const;
 

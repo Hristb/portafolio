@@ -16,19 +16,22 @@ function useDarkMode() {
 
 const EXPERIENCE = [
   {
-    company: "Indra",
+    company: "Indra · MiBanco",
     role: "Senior Backend Engineer",
     period: "ago 2023 – Presente",
-    duration: "2 años 7 meses",
+    duration: "2 años 9 meses",
     color: "#7c3aed",
     active: true,
-    projects: ["Neobanco – Banco por WhatsApp", "MibancoLab – Simulador ADN", "Programa de Puntos y Referidos", "Academia del Progreso", "Yevo Comunidades"],
-    tech: ["Java 17", "Quarkus", "BIAN", "Azure ADF", "GitHub Copilot", "OpenAPI"],
+    projects: ["Neobanco – Banco por WhatsApp", "MibancoLab – Simulador ADN", "Programa de Puntos y Referidos", "Academia de Progreso", "YEVO – Comunidades", "Azure Personalizer"],
+    tech: ["Java 17", "Quarkus", "Spring Boot", "Angular", "Node.js", "BIAN", "Azure ADF", "Azure Functions", "ELK Stack", "SonarCloud", "GitHub Copilot", "SDD"],
     highlights: [
-      "Integración del core bancario con canales digitales bajo arquitectura BIAN",
-      "Interoperabilidad de billeteras Yape/Mibanco y transfers por número de celular",
-      "Azure Personalizer para personalización de cursos en Yevo Comunidades",
-      "Uso intensivo de GitHub Copilot para aceleración del ciclo de desarrollo",
+      "Desarrollo de APIs y microservicios multicapa para conectar el Neobanco (WhatsApp) al core bancario bajo estándares BIAN",
+      "Interoperabilidad de billeteras Yape/Mibanco, transferencias interbancarias y pagos entre tarjetas",
+      "Fullstack en MiBancoLab: Angular + microservicios + ADF para Academia de Progreso, cargas masivas y gestión de cursos/certificados",
+      "Integración ChatBot Botmaker en YEVO y Azure Functions para módulos financieros y automatización",
+      "Azure Personalizer para personalización de cursos; Azure Data Factory para cargas masivas y flujos de reenganche",
+      "Desarrollo AI-driven: GitHub Copilot con Prompt Engineering avanzado y metodología SDD (Spec-Driven Development)",
+      "Monitoreo y análisis de incidencias en producción con ELK Stack (Elasticsearch, Logstash, Kibana)",
     ],
   },
   {
