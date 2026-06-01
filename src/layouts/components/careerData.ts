@@ -27,8 +27,8 @@ export const NODES: JNode[] = [
   },
   {
     id: "uni", num: 2, x: 220, y: 450, type: "study",
-    label: "UNFV", icon: "🎓", period: "2014 – 2018",
-    desc: "Universidad Nacional Federico Villarreal · Ingeniería de Sistemas. Algoritmos, SO, redes y la teoría que la práctica haría añicos.",
+    label: "UNU", icon: "🎓", period: "2016 – 2022",
+    desc: "Universidad Nacional de Ucayali · Ingeniería de Sistemas. Bachiller 2022. Base teórica slida que la práctica en producción completa cada día.",
     tags: ["Ingeniería Sistemas", "Algoritmos", "Java", "Redes"],
   },
   {
@@ -39,9 +39,9 @@ export const NODES: JNode[] = [
   },
   {
     id: "revsa", num: 4, x: 510, y: 450, type: "job",
-    label: "REVSA", icon: "🌱", period: "abr 2019 – nov 2021",
-    desc: "Primer empleo formal en REVSA – Credivargas. Entendí qué es software en producción real con usuarios reales y errores a las 2am.",
-    tags: ["Java", "SQL", "APIs REST", "Web"],
+    label: "REVSA", icon: "🌱", period: "2016 – nov 2021",
+    desc: "Primer empleo formal en REVSA – Credivargas (Ucayali). Cinco años construyendo desde intranet y sistemas de gestión hasta un Dashboard KPI con microservicios. Entendí qué es software en producción real.",
+    tags: ["Java", "PHP", "SQL Server", "MariaDB", "Angular", "APIs REST"],
   },
   {
     id: "docker", num: 5, x: 710, y: 395, type: "tech",

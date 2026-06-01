@@ -1,6 +1,6 @@
 ---
 title: Hrist Bartra
-email: hristjoy@gmail.com
+email: hristbartra@gmail.com
 image: "/images/avatar.png"
 description: Senior Backend Engineer especializado en FinTech, microservicios Java/Quarkus y arquitectura bancaria BIAN.
 social:

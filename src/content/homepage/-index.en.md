@@ -18,7 +18,7 @@ features:
       - "**Indra (2023 - Present):** Senior Backend Engineer — Neobank & MibancoLab projects."
       - "**Canvia (2022 - 2023):** Systems Analyst — Risk Profiling System (INER)."
       - "**GLOBAL HITSS (2021 - 2022):** Systems Analyst — SIAC System for Claro Perú."
-      - "**REVSA - Grupo Credivargas (2019 - 2021):** Developer — KPI Dashboard and management systems."
+      - "**REVSA - Grupo Credivargas (2016 - 2021):** Developer — Intranet, web systems and KPI Dashboard."
     button:
       enable: true
       label: "Learn More About Me"
@@ -28,11 +28,13 @@ features:
     image: "/images/service-2.png"
     content: "Specialized in modern technologies for high-availability financial solutions:"
     bulletpoints:
-      - "**Backend:** Java 17, Quarkus, Spring Boot, REST APIs, Microservices and BIAN Architecture."
+      - "**Backend:** Java 11/17/21, Quarkus, Spring Boot, Spring WebFlux, REST APIs, Microservices and BIAN Architecture."
       - "**Cloud & DevOps:** Microsoft Azure (ADF, Functions, Personalizer), Docker, Kubernetes, CI/CD with Azure DevOps."
-      - "**Databases:** MySQL, Oracle, SQL and MongoDB."
-      - "**Frontend:** Angular, TypeScript, SCSS and TailwindCSS."
+      - "**Databases:** MySQL, Oracle, MariaDB, SQL Server, Teradata, Informix and MongoDB."
+      - "**Frontend:** Angular 10–17, TypeScript, SCSS and TailwindCSS."
       - "**Security:** Spring Security, OAuth2, JWT and token-based authentication."
+      - "**Testing:** JUnit, Mockito, TDD, BDD."
+      - "**Tools:** Postman, Jira, GitLab, GitHub, Eclipse, VS Code."
     button:
       enable: false
       label: ""

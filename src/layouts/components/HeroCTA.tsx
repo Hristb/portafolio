@@ -193,8 +193,8 @@ export default function HeroCTA() {
                 LinkedIn
               </a>
               <a
-                href="/downloads/cv-hrist-bartra.pdf"
-                download
+                href="/downloads/cv-hrist-bartra.docx"
+                download="CV-Hrist-Bartra.docx"
                 style={{
                   display: "inline-flex", alignItems: "center", gap: 9,
                   padding: "13px 30px", borderRadius: 10,

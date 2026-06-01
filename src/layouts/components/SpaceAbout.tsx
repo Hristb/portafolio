@@ -638,7 +638,7 @@ function DesktopProfilePanel({ dark, T, activeNode, onClearNode }: {
       </div>
 
       {/* CTA buttons */}
-      <div style={{ display: "flex", gap: 7, marginTop: "auto", paddingTop: 4 }}>
+      <div style={{ display: "flex", gap: 7, paddingTop: 4 }}>
         <a
           href="https://www.linkedin.com/in/hrist-joy-bartra-saavedra-09b71913a/"
           target="_blank" rel="noopener noreferrer"
@@ -684,7 +684,7 @@ export default function SpaceAbout() {
   const [isMobile, setIsMobile] = useState(
     () => typeof window !== "undefined" && window.innerWidth < 768
   );
-  const [journeyId, setJourneyId] = useState<string | null>(null);
+  const [journeyId, setJourneyId] = useState<string | null>("indra");
   const journeyNode: JNode | null = journeyId ? NODES.find(n => n.id === journeyId) ?? null : null;
 
   useEffect(() => {
@@ -748,7 +748,26 @@ export default function SpaceAbout() {
           }}
         />
       )}
-
+      {/* Notas diarias – subtle top line */}
+      <a
+        href="/notas"
+        style={{
+          position: "absolute", top: 12, right: 18, zIndex: 30,
+          display: "inline-flex", alignItems: "center", gap: 6,
+          textDecoration: "none",
+          fontFamily: "ui-monospace,monospace", fontSize: 10,
+          letterSpacing: "0.14em",
+          color: dark ? "#c4b5fd" : "#7c3aed",
+          background: dark ? "rgba(124,58,237,0.18)" : "rgba(124,58,237,0.09)",
+          border: dark ? "1px solid rgba(167,139,250,0.45)" : "1px solid rgba(124,58,237,0.35)",
+          borderRadius: 6,
+          padding: "4px 10px",
+        }}
+      >
+        <span style={{ fontSize: 11 }}>📓</span>
+        <span>notas diarias</span>
+        <span style={{ opacity: 0.7, fontSize: 11 }}>→</span>
+      </a>
       {/*  MOBILE LAYOUT  */}
       {isMobile ? (
         <>
