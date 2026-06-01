@@ -17,3 +17,16 @@ All development is **AI-driven** — I use **GitHub Copilot** with advanced **Pr
 Previous experience at **Canvia** (Risk Profiling System for INER), **GLOBAL HITSS** (SIAC System for Claro Perú) and **REVSA - Grupo Credivargas** (KPI Dashboard and internal management systems).
 
 I'm a self-taught, analytical professional with a constant drive for improvement. I'm motivated by building robust, scalable and secure solutions that create real impact in the financial industry. 🚀
+
+## Soft Skills
+
+Effective communication and active listening, time planning and management, and stress management in high-demand environments.
+
+## Languages
+
+- **Spanish:** Native
+- **English:** Basic
+
+## Interests
+
+Family, music and cinema.

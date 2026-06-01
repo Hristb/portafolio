@@ -147,6 +147,18 @@ const testimonialSectionCollection = defineCollection({
   }),
 });
 
+// Notas (cuaderno personal) collection schema
+const notasCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "src/content/notas" }),
+  schema: z.object({
+    date: z.date(),
+    tipo: z.enum(["til", "libro", "reflexion"]),
+    tema: z.string(),
+    fuente: z.string().optional(), // para libros: "Nombre del libro — Autor"
+    draft: z.boolean().optional(),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
@@ -156,6 +168,7 @@ export const collections = {
   pages: pagesCollection,
   about: aboutCollection,
   contact: contactCollection,
+  notas: notasCollection,
 
   // sections
   ctaSection: ctaSectionCollection,

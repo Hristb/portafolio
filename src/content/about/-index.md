@@ -16,3 +16,16 @@ Todo el desarrollo está impulsado por **IA** — utilizo **GitHub Copilot** con
 Tengo experiencia previa en **Canvia** (Sistema de Perfilamiento de Riesgo para el INER), **GLOBAL HITSS** (Sistema SIAC para Claro Perú) y **REVSA - Grupo Credivargas** (Dashboard KPI y sistemas de gestión interna).
 
 Soy un profesional autodidacta, analítico y con espíritu de superación constante. Me motiva construir soluciones robustas, escalables y seguras que generen impacto real en la industria financiera. 🚀
+
+## Habilidades Blandas
+
+Comunicación efectiva y escucha activa, planificación y gestión del tiempo, y manejo del estrés en entornos de alta exigencia.
+
+## Idiomas
+
+- **Español:** Nativo
+- **Inglés:** Básico
+
+## Intereses
+
+Familia, música y cine.

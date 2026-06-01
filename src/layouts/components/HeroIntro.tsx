@@ -189,7 +189,7 @@ export default function HeroIntro() {
         </a>
         <a
           href="/downloads/cv-hrist-bartra.pdf"
-          download
+          download="CV-Hrist-Bartra.pdf"
           style={btnGhost}
         >
           <CVIcon />

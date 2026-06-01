@@ -18,7 +18,7 @@ features:
       - "**Indra · MiBanco (2023 - Presente):** Senior Backend Engineer — Neobanco (Banco por WhatsApp), MiBancoLab, Academia de Progreso, YEVO, Puntos y Referidos."
       - "**Canvia (2022 - 2023):** Analista Programador — Sistema de Perfilamiento de Riesgo (INER)."
       - "**GLOBAL HITSS (2021 - 2022):** Analista Programador — Sistema SIAC para Claro Perú."
-      - "**REVSA - Grupo Credivargas (2019 - 2021):** Desarrollador — Dashboard KPI y sistemas de gestión."
+      - "**REVSA - Grupo Credivargas (2016 - 2021):** Desarrollador — Intranet, sistemas web y Dashboard KPI."
     button:
       enable: true
       label: "Conoce Más Sobre Mí"
@@ -28,11 +28,13 @@ features:
     image: "/images/service-2.png"
     content: "Especializado en tecnologías modernas para soluciones financieras de alta disponibilidad:"
     bulletpoints:
-      - "**Backend:** Java 17, Quarkus, Spring Boot, APIs REST, Microservicios y Arquitectura BIAN."
+      - "**Backend:** Java 11/17/21, Quarkus, Spring Boot, Spring WebFlux, APIs REST, Microservicios y Arquitectura BIAN."
       - "**Cloud & DevOps:** Microsoft Azure (ADF, Functions, Personalizer), Docker, Kubernetes, CI/CD con Azure DevOps."
-      - "**Bases de Datos:** MySQL, Oracle, SQL y MongoDB."
-      - "**Frontend:** Angular, TypeScript, SCSS y TailwindCSS."
+      - "**Bases de Datos:** MySQL, Oracle, MariaDB, SQL Server, Teradata, Informix y MongoDB."
+      - "**Frontend:** Angular 10–17, TypeScript, SCSS y TailwindCSS."
       - "**Seguridad:** Spring Security, OAuth2, JWT y autenticación basada en tokens."
+      - "**Testing:** JUnit, Mockito, TDD, BDD."
+      - "**Herramientas:** Postman, Jira, GitLab, GitHub, Eclipse, VS Code."
       - "**Workflow:** GitHub Copilot (uso diario desde 2024), metodología SDD y OpenAPI para documentación automática."
     button:
       enable: false
