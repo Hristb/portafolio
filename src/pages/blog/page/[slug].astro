@@ -6,6 +6,7 @@ import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import { getAllTaxonomy, getTaxonomy } from "@/lib/taxonomyParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
+import CategoryQuickNav from "@/partials/CategoryQuickNav.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 import PostSidebar from "@/partials/PostSidebar.astro";
 import type { CollectionEntry } from "astro:content";
@@ -52,8 +53,9 @@ export async function getStaticPaths() {
   image={postIndex.data.image}
   description={postIndex.data.description}
 >
-  <PageHeader title={postIndex.data.title} />
-  <section class="section">
+  <PageHeader title={postIndex.data.title} compact />
+  <CategoryQuickNav categories={categories} allCategories={allCategories} />
+  <section class="pb-16 pt-4 xl:pb-24">
     <div class="container">
       <div class="row gx-5">
         <!-- blog posts -->
@@ -61,7 +63,7 @@ export async function getStaticPaths() {
           <div class="row">
             {
               currentPosts.map((post) => (
-                <div class="mb-14 md:col-6">
+                <div class="mb-8 md:col-6">
                   <BlogCard data={post} />
                 </div>
               ))

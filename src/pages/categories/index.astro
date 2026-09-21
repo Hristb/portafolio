@@ -10,24 +10,19 @@ const categories = await getTaxonomy(BLOG_FOLDER, "categories");
 const allCategories = await getAllTaxonomy(BLOG_FOLDER, "categories");
 ---
 
-<Base title={"Categories"}>
-  <PageHeader title={"Categories"} />
+<Base title={"Categorías"}>
+  <PageHeader title={"Categorías"} />
   <section class="section">
-    <div class="container text-center">
-      <ul>
+    <div class="container">
+      <ul class="taxonomy-list mx-auto max-w-[560px]">
         {
           categories.map((category: string) => {
             const count = allCategories.filter((c) => c === category).length;
             return (
-              <li class="m-3 inline-block">
-                <a
-                  href={`/categories/${category}`}
-                  class="block rounded bg-light px-4 py-2 text-xl text-text-dark dark:bg-darkmode-light dark:text-darkmode-text-dark"
-                >
-                  {humanize(category)}{" "}
-                  <span class="ml-2 rounded bg-body px-2 dark:bg-darkmode-body">
-                    {count}
-                  </span>
+              <li>
+                <a class="taxonomy-row" href={`/categories/${category}`}>
+                  <span>{humanize(category)}</span>
+                  <span class="taxonomy-count">{count}</span>
                 </a>
               </li>
             );

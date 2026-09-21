@@ -1,19 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
-function useDarkMode() {
-  const [dark, setDark] = React.useState(false);
-  React.useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
-    const obs = new MutationObserver(() =>
-      setDark(document.documentElement.classList.contains("dark"))
-    );
-    obs.observe(document.documentElement, { attributeFilter: ["class"] });
-    return () => obs.disconnect();
-  }, []);
-  return dark;
-}
-
 const TECH = {
   Backend: [
     { name: "Java 17",         pct: 95, color: "#f59e0b", years: "6 años" },
@@ -28,7 +15,7 @@ const TECH = {
     { name: "Docker",           pct: 80, color: "#2496ed", years: "3 años" },
     { name: "Kubernetes",       pct: 70, color: "#326ce5", years: "2 años" },
     { name: "Azure DevOps",     pct: 80, color: "#0078d4", years: "3 años" },
-    { name: "GitHub Actions",   pct: 78, color: "#a78bfa", years: "2 años" },
+    { name: "GitHub Actions",   pct: 78, color: "#2088ff", years: "2 años" },
     { name: "ELK Stack",        pct: 74, color: "#f4b942", years: "2 años" },
     { name: "SonarCloud",       pct: 75, color: "#f3702a", years: "2 años" },
   ],
@@ -42,7 +29,7 @@ const TECH = {
     { name: "MySQL",     pct: 88, color: "#4479a1", years: "6 años" },
     { name: "Oracle",   pct: 82, color: "#f80000", years: "4 años" },
     { name: "MongoDB",  pct: 70, color: "#47a248", years: "3 años" },
-    { name: "SQL",      pct: 92, color: "#a78bfa", years: "6 años" },
+    { name: "SQL",      pct: 92, color: "#6b7280", years: "6 años" },
     { name: "Azure SQL", pct: 80, color: "#0078d4", years: "3 años" },
   ],
 } as const;
@@ -50,10 +37,8 @@ const TECH = {
 type Cat = keyof typeof TECH;
 
 export default function TechStackGrid() {
-  const dark = useDarkMode();
   const [cat, setCat] = useState<Cat>("Backend");
   const [inView, setInView] = useState(false);
-  const [prevCat, setPrevCat] = useState<Cat>("Backend");
   const [hovered, setHovered] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -67,17 +52,12 @@ export default function TechStackGrid() {
   }, []);
 
   const switchCat = (c: Cat) => {
-    setPrevCat(cat);
     setInView(false);
     setCat(c);
     setTimeout(() => setInView(true), 60);
   };
 
   const items = TECH[cat];
-
-  const textColor = dark ? "rgba(255,255,255,0.88)" : "#1a0a3c";
-  const mutedColor = dark ? "rgba(255,255,255,0.28)" : "rgba(100,72,150,0.5)";
-  const trackBg = dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.07)";
 
   return (
     <div ref={ref} style={{ display: "flex", flexDirection: "column", gap: 18, width: "100%" }}>
@@ -89,15 +69,13 @@ export default function TechStackGrid() {
             key={c}
             onClick={() => switchCat(c)}
             style={{
-              fontFamily: "ui-monospace, monospace",
-              fontSize: 11, letterSpacing: "0.18em",
+              fontSize: 12.5, fontWeight: 500,
               padding: "5px 15px", borderRadius: 20,
-              border: cat === c ? "1px solid #7c3aed" : `1px solid ${dark ? "rgba(124,58,237,0.22)" : "rgba(124,58,237,0.2)"}`,
-              background: cat === c ? "#7c3aed" : "transparent",
-              color: cat === c ? "#fff" : (dark ? "rgba(255,255,255,0.5)" : "#7c3aed"),
+              border: `1px solid ${cat === c ? "var(--ink-dark)" : "var(--edge)"}`,
+              background: cat === c ? "var(--ink-dark)" : "transparent",
+              color: cat === c ? "var(--surface)" : "var(--ink)",
               cursor: "pointer",
               transition: "all 0.22s",
-              textTransform: "uppercase",
             }}
           >
             {c}
@@ -115,28 +93,25 @@ export default function TechStackGrid() {
           >
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
               <span style={{
-                fontFamily: "ui-monospace, monospace",
-                fontSize: 12.5, color: textColor,
+                fontSize: 13, color: "var(--ink)",
                 fontWeight: hovered === item.name ? 700 : 400,
                 transition: "font-weight 0.2s",
               }}>
                 {item.name}
               </span>
               <span style={{
-                fontFamily: "ui-monospace, monospace",
-                fontSize: 11, color: item.color,
+                fontSize: 11.5, color: "var(--ink-light)",
                 transition: "all 0.2s",
               }}>
                 {hovered === item.name ? item.years : `${item.pct}%`}
               </span>
             </div>
-            <div style={{ height: 7, borderRadius: 4, background: trackBg, overflow: "hidden", position: "relative" }}>
+            <div style={{ height: 6, borderRadius: 4, background: "var(--surface-alt)", overflow: "hidden", position: "relative" }}>
               <div style={{
                 height: "100%", borderRadius: 4,
-                background: `linear-gradient(90deg, ${item.color}dd, ${item.color}88)`,
+                background: item.color,
                 width: inView ? `${item.pct}%` : "0%",
                 transition: `width 0.75s cubic-bezier(.4,0,.2,1) ${i * 90}ms`,
-                boxShadow: hovered === item.name ? `0 0 10px ${item.color}88` : "none",
               }} />
             </div>
           </div>
@@ -151,14 +126,12 @@ export default function TechStackGrid() {
             onMouseEnter={() => setHovered(item.name)}
             onMouseLeave={() => setHovered(null)}
             style={{
-              fontFamily: "ui-monospace, monospace",
-              fontSize: 10, padding: "3px 10px", borderRadius: 20,
-              background: hovered === item.name ? `${item.color}22` : (dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.025)"),
-              border: `1px solid ${hovered === item.name ? item.color + "66" : (dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)")}`,
-              color: hovered === item.name ? item.color : mutedColor,
+              fontSize: 11.5, padding: "3px 10px", borderRadius: 20,
+              background: hovered === item.name ? `${item.color}18` : "transparent",
+              border: `1px solid ${hovered === item.name ? item.color : "var(--edge)"}`,
+              color: hovered === item.name ? item.color : "var(--ink-light)",
               cursor: "default",
               transition: "all 0.2s",
-              letterSpacing: "0.05em",
             }}
           >
             {item.name}

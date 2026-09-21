@@ -1,5 +1,4 @@
 ---
-import TwSizeIndicator from "@/components/TwSizeIndicator.astro";
 import config from "@/config/config.json";
 import theme from "@/config/theme.json";
 import { plainify } from "@/lib/utils/textConverter";
@@ -44,20 +43,35 @@ const { title, meta_title, description, image, noindex, canonical } =
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google Tag Manager -->
+    <script is:inline define:vars={{ GTM_ID: config.analytics.gtm_id }}>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", GTM_ID);
+    </script>
+    <!-- End Google Tag Manager -->
+
     <!-- favicon -->
     <link rel="shortcut icon" href={config.site.favicon} />
     <!-- theme meta -->
     <meta name="theme-name" content="astroplate" />
-    <meta name="msapplication-TileColor" content="#0e0b1e" />
+    <meta name="msapplication-TileColor" content="#121212" />
     <meta
       name="theme-color"
       media="(prefers-color-scheme: light)"
-      content="#f8f7ff"
+      content="#ffffff"
     />
     <meta
       name="theme-color"
       media="(prefers-color-scheme: dark)"
-      content="#0e0b1e"
+      content="#121212"
     />
     <meta name="generator" content={Astro.generator} />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -185,51 +199,15 @@ const { title, meta_title, description, image, noindex, canonical } =
       .reveal.delay-3  { transition-delay: 0.42s; }
       .reveal.delay-4  { transition-delay: 0.58s; }
 
-      /* ── Hero animated gradient mesh ─────────────────── */
-      .hero-section {
-        position: relative;
-        overflow: hidden;
-      }
-      .hero-section::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(91, 63, 206, 0.06) 0%,
-          rgba(167, 139, 250, 0.04) 50%,
-          rgba(232, 168, 243, 0.05) 100%
-        );
-        background-size: 300% 300%;
-        animation: meshPulse 16s ease infinite;
-        pointer-events: none;
-        z-index: 0;
-      }
-      .dark .hero-section::before {
-        background: linear-gradient(
-          135deg,
-          rgba(167, 139, 250, 0.13) 0%,
-          rgba(196, 130, 240, 0.09) 50%,
-          rgba(91, 63, 206, 0.11) 100%
-        );
-        background-size: 300% 300%;
-      }
-      .hero-section > * { position: relative; z-index: 1; }
-      @keyframes meshPulse {
-        0%, 100% { background-position: 0% 50%; }
-        50%       { background-position: 100% 50%; }
-      }
-
       /* ── Skip navigation ─────────────────────────────── */
       .skip-nav {
         position: absolute;
         top: -48px;
         left: 1rem;
         padding: 8px 18px;
-        background: #7c3aed;
-        color: #fff;
+        background: var(--color-dark);
+        color: var(--color-body);
         border-radius: 0 0 8px 8px;
-        font-family: ui-monospace, monospace;
         font-size: 13px;
         font-weight: 600;
         z-index: 10000;
@@ -247,64 +225,21 @@ const { title, meta_title, description, image, noindex, canonical } =
           scroll-behavior: auto !important;
         }
       }
-
-      /* ── Glassmorphism feature cards ─────────────────── */
-      .glass-card {
-        background: rgba(255, 255, 255, 0.62);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border: 1px solid rgba(221, 213, 247, 0.7);
-        border-radius: 1rem;
-        transition: box-shadow 0.35s ease, transform 0.35s ease;
-      }
-      .glass-card:hover {
-        box-shadow: 0 18px 42px rgba(91, 63, 206, 0.1);
-        transform: translateY(-4px);
-      }
-      .dark .glass-card {
-        background: rgba(26, 22, 53, 0.7);
-        border-color: rgba(45, 37, 80, 0.9);
-      }
-      .dark .glass-card:hover {
-        box-shadow: 0 18px 42px rgba(167, 139, 250, 0.15);
-      }
-
-      /* ── Cursor glow (desktop pointer only) ─────────── */
-      @media (pointer: fine) {
-        #cursor-glow {
-          position: fixed;
-          width: 480px;
-          height: 480px;
-          border-radius: 50%;
-          background: radial-gradient(
-            circle,
-            rgba(91, 63, 206, 0.06) 0%,
-            transparent 68%
-          );
-          pointer-events: none;
-          transform: translate(-50%, -50%);
-          z-index: 9999;
-          top: -240px;
-          left: -240px;
-          will-change: left, top;
-          transition: left 0.06s linear, top 0.06s linear;
-        }
-        .dark #cursor-glow {
-          background: radial-gradient(
-            circle,
-            rgba(167, 139, 250, 0.1) 0%,
-            transparent 68%
-          );
-        }
-      }
-      @media (pointer: coarse) {
-        #cursor-glow { display: none; }
-      }
     </style>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${config.analytics.gtm_id}`}
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      />
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <a href="#main-content" class="skip-nav">Saltar al contenido principal</a>
-    <TwSizeIndicator />
     <Header />
     <SearchModal client:load />
     <main id="main-content">
@@ -312,33 +247,13 @@ const { title, meta_title, description, image, noindex, canonical } =
     </main>
     <Footer />
 
-    <!-- Cursor glow orb -->
-    <div id="cursor-glow" aria-hidden="true"></div>
-
     <script>
       // ─────────────────────────────────────────────────────────
       // All logic is wrapped in initPage() and called on every
       // astro:page-load event (fires after first load AND after
       // every View Transition navigation).
       // ─────────────────────────────────────────────────────────
-
-      const i18nMap: Record<string, Record<string, string>> = {
-        en: {
-          "nav.home": "Home",
-          "nav.about": "About Me",
-          "nav.articles": "Articles",
-          "nav.contact": "Contact",
-          "nav.cta": "Contact Me",
-        },
-      };
-
-      function applyI18n() {
-        const map = i18nMap["en"];
-        document.querySelectorAll<HTMLElement>("[data-i18n]").forEach((el) => {
-          const key = el.dataset.i18n!;
-          if (map[key]) el.textContent = map[key];
-        });
-      }
+      import { trackPageView, trackTaggedClicks } from "@/lib/utils/analytics";
 
       // Keep a reference so we can disconnect before re-observing
       let revealObserver: IntersectionObserver | null = null;
@@ -370,27 +285,18 @@ const { title, meta_title, description, image, noindex, canonical } =
           revealObserver!.observe(el)
         );
 
-        // ── 4. Apply nav labels ───────────────────────
-        applyI18n();
+        // ── 4. Report the (virtual) page view to GTM ──────────
+        trackPageView();
       }
-
-      // ── Cursor glow: set up once, persists across navigations
-      // (the element lives in the persistent body, not the slot)
-      (() => {
-        const glow = document.getElementById("cursor-glow");
-        if (!glow || !window.matchMedia("(pointer: fine)").matches) return;
-        // Use a named handler so we never add it twice
-        function onMouseMove(e: MouseEvent) {
-          glow!.style.left = e.clientX + "px";
-          glow!.style.top  = e.clientY + "px";
-        }
-        // Remove first in case of HMR re-run, then re-add
-        document.removeEventListener("mousemove", onMouseMove as EventListener);
-        document.addEventListener("mousemove", onMouseMove as EventListener);
-      })();
 
       // ── Run on first load AND after every navigation ─────────
       document.addEventListener("astro:page-load", initPage);
+
+      // Delegated click tracking — attached once; `document` persists
+      // across View Transition navigations, so this must NOT live
+      // inside initPage() or it would re-attach (and double-fire) on
+      // every page change.
+      trackTaggedClicks();
     </script>
   </body>
 </html>

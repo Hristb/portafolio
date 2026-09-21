@@ -1,8 +1,14 @@
 ---
-import SpaceMissions from "@/components/SpaceMissions";
+import BlogCard from "@/components/BlogCard.astro";
+import Pagination from "@/components/Pagination.astro";
+import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
+import { getAllTaxonomy, getTaxonomy } from "@/lib/taxonomyParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
+import CategoryQuickNav from "@/partials/CategoryQuickNav.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import PostSidebar from "@/partials/PostSidebar.astro";
 import type { CollectionEntry } from "astro:content";
 import { getEntry } from "astro:content";
 
@@ -13,19 +19,12 @@ const postIndex = (await getEntry(
   "-index"
 )) as CollectionEntry<"blog">;
 const posts = await getSinglePage(BLOG_FOLDER);
+const allCategories = await getAllTaxonomy(BLOG_FOLDER, "categories");
+const categories = await getTaxonomy(BLOG_FOLDER, "categories");
+const tags = await getTaxonomy(BLOG_FOLDER, "tags");
 const sortedPosts = sortByDate(posts);
-
-const missions = sortedPosts.map((post) => ({
-  id: post.id,
-  slug: post.id,
-  title: post.data.title,
-  description: post.data.description ?? "",
-  date: post.data.date?.toISOString() ?? new Date().toISOString(),
-  image: post.data.image ?? undefined,
-  categories: post.data.categories ?? [],
-  tags: post.data.tags ?? [],
-  author: post.data.author ?? "Admin",
-}));
+const totalPages = Math.ceil(posts.length / config.settings.pagination);
+const currentPosts = sortedPosts.slice(0, config.settings.pagination);
 ---
 
 <Base
@@ -34,13 +33,36 @@ const missions = sortedPosts.map((post) => ({
   image={postIndex.data.image}
   description={postIndex.data.description}
 >
-  <section class="section-sm">
+  <PageHeader title={postIndex.data.title} compact />
+  <CategoryQuickNav categories={categories} allCategories={allCategories} />
+  <section class="pb-16 pt-4 xl:pb-24">
     <div class="container">
-      <SpaceMissions
-        client:load
-        missions={missions}
-        blogFolder={BLOG_FOLDER}
-      />
+      <div class="row gx-5">
+        <!-- blog posts -->
+        <div class="lg:col-8">
+          <div class="row">
+            {
+              currentPosts.map((post) => (
+                <div class="mb-8 md:col-6">
+                  <BlogCard data={post} />
+                </div>
+              ))
+            }
+          </div>
+          <Pagination
+            section={BLOG_FOLDER}
+            currentPage={1}
+            totalPages={totalPages}
+          />
+        </div>
+
+        <!-- sidebar -->
+        <PostSidebar
+          categories={categories}
+          tags={tags}
+          allCategories={allCategories}
+        />
+      </div>
     </div>
   </section>
 </Base>

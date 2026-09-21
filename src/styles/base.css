@@ -1,3 +1,29 @@
+/* ── Theme-adaptive aliases ──────────────────────────────────
+   The tw-theme plugin writes --color-* on :root (light) and
+   --color-darkmode-* on .dark, but never overrides the plain
+   --color-* name — so raw var(--color-text) never actually
+   switches. These aliases do, for use in inline React styles
+   that can't rely on Tailwind's dark: variant.
+─────────────────────────────────────────────── */
+:root {
+  --ink: var(--color-text);
+  --ink-dark: var(--color-text-dark);
+  --ink-light: var(--color-text-light);
+  --surface: var(--color-body);
+  --surface-alt: var(--color-light);
+  --edge: var(--color-border);
+  --accent: var(--color-primary);
+}
+.dark {
+  --ink: var(--color-darkmode-text);
+  --ink-dark: var(--color-darkmode-text-dark);
+  --ink-light: var(--color-darkmode-text-light);
+  --surface: var(--color-darkmode-body);
+  --surface-alt: var(--color-darkmode-light);
+  --edge: var(--color-darkmode-border);
+  --accent: var(--color-darkmode-primary);
+}
+
 /* ── Fluid typography ────────────────────────────────────────
    Min (375px / 23.4375rem) → Max (1280px / 80rem)
    Formula: clamp(min, preferred, max)

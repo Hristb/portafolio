@@ -1,0 +1,54 @@
+---
+interface Props {
+  class?: string;
+  location?: string;
+}
+
+const { class: className = "", location = "unknown" }: Props = Astro.props;
+---
+
+<div class:list={["profile-links", className]}>
+  <a
+    href="https://github.com/Hristb"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn btn-outline-primary btn-sm rounded-full profile-link"
+    data-gtm-id="github"
+    data-gtm-location={location}
+  >
+    GitHub <span aria-hidden="true">→</span>
+  </a>
+  <a
+    href="https://www.linkedin.com/in/hrist-joy-bartra-saavedra-09b71913a/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn btn-outline-primary btn-sm rounded-full profile-link"
+    data-gtm-id="linkedin"
+    data-gtm-location={location}
+  >
+    LinkedIn <span aria-hidden="true">→</span>
+  </a>
+  <a
+    href="/downloads/cv-hrist-bartra.pdf"
+    download="CV-Hrist-Bartra.pdf"
+    class="btn btn-outline-primary btn-sm rounded-full profile-link"
+    data-gtm-id="cv"
+    data-gtm-location={location}
+  >
+    Ver mi CV <span aria-hidden="true">→</span>
+  </a>
+</div>
+
+<style>
+  .profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .profile-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+</style>

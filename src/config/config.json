@@ -1,4 +1,8 @@
 {
+  "analytics": {
+    "gtm_id": "GTM-WKQSQKZT"
+  },
+
   "site": {
     "title": "Hristb",
     "base_url": "https://hristbartra.com",
@@ -23,7 +27,6 @@
   },
 
   "params": {
-    "contact_form_action": "#",
     "copyright": "Hrist Joy Bartra Saavedra © 2026"
   },
 
