@@ -6,24 +6,11 @@ banner:
   image: "/images/banner.png"
   button:
     enable: true
-    label: "Ver mi trayectoria"
-    link: "#trayectoria"
+    label: "Ver mis proyectos"
+    link: "#proyectos"
 
 # Features
 features:
-  - title: "Trayectoria"
-    image: "/images/service-3.png"
-    content: "Más de 6 años pasando por distintos equipos, retos y stacks — esto es lo que fui construyendo en el camino:"
-    bulletpoints:
-      - "**Indra · MiBanco (2023 – Presente):** Neobanco (Banco por WhatsApp), MiBancoLab, Academia de Progreso, YEVO, Puntos y Referidos."
-      - "**Canvia (2022 – 2023):** Sistema de Perfilamiento de Riesgo (INER)."
-      - "**GLOBAL HITSS (2021 – 2022):** Sistema SIAC para Claro Perú."
-      - "**REVSA · Grupo Credivargas (2016 – 2021):** Intranet, sistemas web y Dashboard KPI."
-    button:
-      enable: true
-      label: "Conoce más sobre mí"
-      link: "/about"
-
   - title: "Con lo que construyo"
     image: "/images/service-2.png"
     content: "Herramientas que he ido usando según lo que pedía cada proyecto — de backend a nube, de datos a frontend:"

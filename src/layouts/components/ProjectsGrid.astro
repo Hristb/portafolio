@@ -1,0 +1,196 @@
+---
+import ImageMod from "./ImageMod.astro";
+
+const PROJECTS = [
+  {
+    name: "Feedback App",
+    description: "Reconoce y celebra las fortalezas de tu equipo con \"kudos\" — analiza patrones de colaboración, liderazgo e innovación.",
+    image: "/images/projects/Feedback_App.jpg",
+    demoUrl: "https://hristb.github.io/feedback-app/",
+    repoUrl: "https://github.com/Hristb/feedback-app",
+  },
+  {
+    name: "Mi Biblioteca",
+    description: "Plataforma personal y comunitaria para gestionar y leer libros PDF desde el navegador.",
+    image: "/images/projects/Mi_Biblioteca.png",
+    // el título queda pegado al borde izquierdo de la captura original —
+    // ancla el recorte a la izquierda para no cortarlo
+    objectPosition: "left center",
+    demoUrl: "https://hristb.github.io/mi-biblioteca/",
+    repoUrl: "https://github.com/Hristb/mi-biblioteca",
+  },
+  {
+    name: "Sticker Vault",
+    description: "Tienda de packs de stickers en vinilo — memes, tech y gaming, con pedidos por WhatsApp.",
+    image: "/images/projects/Stickers_App.png",
+    demoUrl: "https://stikersvault.com/",
+    repoUrl: "https://github.com/Hristb/Stikers-app",
+  },
+  {
+    name: "Daylo",
+    description: "Planificación consciente del día: máximo 3 prioridades, un momento de reflexión y un espacio para cuidarte.",
+    image: "/images/projects/Daylo_App.png",
+    demoUrl: "https://hristb.github.io/daylo-app/",
+    repoUrl: "https://github.com/Hristb/daylo-app",
+  },
+];
+---
+
+<div class="projects-grid">
+  {
+    PROJECTS.map((p) => (
+      <div class="project-card">
+        <div class="project-card-image-wrap">
+          <ImageMod
+            class="project-card-image"
+            src={p.image}
+            alt={p.name}
+            width={800}
+            height={500}
+            format="webp"
+            style={{ objectPosition: p.objectPosition ?? "center" }}
+          />
+        </div>
+        <div class="project-card-body">
+          <h3 class="project-card-title">{p.name}</h3>
+          <p class="project-card-desc">{p.description}</p>
+          <div class="project-card-links">
+            {p.demoUrl && (
+              <a
+                href={p.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-card-link"
+                data-gtm-id="project_demo"
+                data-gtm-location={p.name}
+              >
+                Ver demo <span aria-hidden="true">→</span>
+              </a>
+            )}
+            <a
+              href={p.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-card-link"
+              data-gtm-id="project_repo"
+              data-gtm-location={p.name}
+            >
+              Código <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  /* Desktop: 4 cards in a single row — smaller and more in proportion
+     with the rest of the (minimal) page than a 2-col giant-card grid. */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  /* Tablet: 2x2 */
+  @media (max-width: 1023px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Mobile: horizontal swipe carousel (pure CSS scroll-snap, no JS) —
+     each card peeks the next one to signal there's more to scroll to. */
+  @media (max-width: 639px) {
+    .projects-grid {
+      display: flex;
+      grid-template-columns: none;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 14px;
+      margin-inline: -1rem;
+      padding-inline: 1rem;
+      padding-bottom: 6px;
+      scroll-padding-inline: 1rem;
+    }
+
+    .projects-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .project-card {
+      flex: 0 0 82%;
+      scroll-snap-align: start;
+    }
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    border: 1px solid var(--edge);
+    background: var(--surface);
+    overflow: hidden;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .project-card:hover {
+    border-color: var(--ink-dark);
+    transform: translateY(-3px);
+  }
+
+  .project-card-image-wrap {
+    aspect-ratio: 8 / 5;
+    overflow: hidden;
+    background: var(--surface-alt);
+  }
+
+  :global(.project-card-image) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .project-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 20px 20px;
+    flex: 1;
+  }
+
+  .project-card-title {
+    font-size: 1.05rem;
+    color: var(--ink-dark);
+    margin: 0;
+  }
+
+  .project-card-desc {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink-light);
+    margin: 0;
+    flex: 1;
+  }
+
+  .project-card-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+  }
+
+  .project-card-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .project-card-link:hover {
+    text-decoration: underline;
+  }
+</style>
