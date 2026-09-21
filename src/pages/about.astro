@@ -1,5 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
+import ExperienceTimeline from "@/components/ExperienceTimeline";
 import ProfileLinks from "@/partials/ProfileLinks.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 import type { CollectionEntry } from "astro:content";
@@ -24,6 +25,11 @@ const { Content } = await render(about);
         <Content />
       </div>
 
+      <div class="feature-card about-timeline reveal">
+        <h2 class="mb-6 feature-title">Trayectoria</h2>
+        <ExperienceTimeline client:visible />
+      </div>
+
       <div class="about-cta reveal">
         <p class="about-cta-label">¿Hablamos?</p>
         <ProfileLinks class="about-links" location="about_page" />
@@ -36,6 +42,11 @@ const { Content } = await render(about);
   .about-content {
     max-width: 680px;
     margin: 0 auto;
+  }
+
+  .about-timeline {
+    max-width: 680px;
+    margin: 40px auto 0;
   }
 
   .about-cta {
