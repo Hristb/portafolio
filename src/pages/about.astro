@@ -1,11 +1,13 @@
 ---
-import SpaceAbout from "@/components/SpaceAbout";
 import Base from "@/layouts/Base.astro";
+import ProfileLinks from "@/partials/ProfileLinks.astro";
+import PageHeader from "@/partials/PageHeader.astro";
 import type { CollectionEntry } from "astro:content";
-import { getEntry } from "astro:content";
+import { getEntry, render } from "astro:content";
 
 const about = (await getEntry("about", "-index")) as CollectionEntry<"about">;
 const { title, description, meta_title, image } = about.data;
+const { Content } = await render(about);
 ---
 
 <Base
@@ -14,9 +16,43 @@ const { title, description, meta_title, image } = about.data;
   description={description}
   image={image}
 >
-  <section class="section-sm">
+  <PageHeader title="Sobre Mí" compact />
+
+  <section class="pb-16 pt-4 xl:pb-24">
     <div class="container">
-      <SpaceAbout client:load />
+      <div class="about-content content reveal">
+        <Content />
+      </div>
+
+      <div class="about-cta reveal">
+        <p class="about-cta-label">¿Hablamos?</p>
+        <ProfileLinks class="about-links" location="about_page" />
+      </div>
     </div>
   </section>
 </Base>
+
+<style>
+  .about-content {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .about-cta {
+    max-width: 680px;
+    margin: 48px auto 0;
+    padding-top: 32px;
+    border-top: 1px solid var(--edge);
+    text-align: center;
+  }
+
+  .about-cta-label {
+    font-size: 14px;
+    color: var(--ink-light);
+    margin: 0 0 14px;
+  }
+
+  :global(.about-links) {
+    justify-content: center;
+  }
+</style>

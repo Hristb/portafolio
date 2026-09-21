@@ -6,7 +6,7 @@
 
 /* ── Navbar base ─────────────────────────────────────────────── */
 .navbar {
-  @apply relative flex flex-wrap items-center justify-between;
+  @apply relative flex flex-nowrap items-center justify-between lg:flex-wrap;
 }
 
 .navbar-brand {
@@ -253,7 +253,7 @@
     transition: opacity 0.2s, color 0.2s, gap 0.2s;
   }
   .dark .nav-link {
-    color: #f0edff;
+    color: var(--color-darkmode-text-dark);
   }
   .nav-link:hover,
   .nav-link.active {

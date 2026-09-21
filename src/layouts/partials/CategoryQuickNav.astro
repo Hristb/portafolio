@@ -1,0 +1,62 @@
+---
+import { humanize } from "@/lib/utils/textConverter";
+
+const { categories, allCategories } = Astro.props;
+---
+
+<!-- Mobile-only quick access to categories — visible immediately, no
+     need to scroll past the article list to reach it. Desktop keeps
+     the sticky sidebar as the primary way to browse by category. -->
+<div class="container lg:hidden">
+  <div class="category-scroll">
+    {
+      categories.map((category: any) => {
+        const count = allCategories.filter((c: any) => c === category).length;
+        return (
+          <a class="category-chip" href={`/categories/${category}`}>
+            {humanize(category)} <span class="category-chip-count">{count}</span>
+          </a>
+        );
+      })
+    }
+  </div>
+</div>
+
+<style>
+  .category-scroll {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0 0 1.25rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .category-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-chip {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid var(--edge);
+    font-size: 0.85rem;
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .category-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .category-chip-count {
+    color: var(--ink-light);
+    font-size: 0.75rem;
+  }
+</style>

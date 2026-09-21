@@ -1,7 +1,7 @@
 ---
 title: Hrist Bartra
 email: hristbartra@gmail.com
-image: "/images/avatar.png"
+image: "/images/hrist-perfil.jpg"
 description: Senior Backend Engineer especializado en FinTech, microservicios Java/Quarkus y arquitectura bancaria BIAN.
 social:
   - name: github

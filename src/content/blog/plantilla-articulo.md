@@ -9,7 +9,9 @@ title: "Título del artículo"                   # Requerido — aparece en la t
 meta_title: ""                                   # Opcional — si vacío usa `title`. Para SEO personalizado
 description: "Descripción breve de 1-2 líneas." # Requerido — preview en la tarjeta y meta description
 date: 2026-05-27T10:00:00Z                       # Requerido — formato ISO 8601
-image: "/images/image-placeholder.png"           # Opcional — ruta desde /public/images/
+image: "/images/blog/slug-del-articulo.jpg"      # Opcional. Coloca el archivo en /public/images/blog/
+                                                  # Tamaño recomendado: 800×500px (o proporción 8:5), JPG o WebP, < 300KB.
+                                                  # Si lo dejas vacío, la tarjeta usa un placeholder automático (placehold.co).
 categories: ["Backend", "Java"]                  # Al menos 1. Ver categorías usadas abajo ↓
 author: "hrist-bartra"                           # Debe coincidir con slug en src/content/authors/
 tags: ["quarkus", "openapi", "rest"]             # Palabras clave técnicas en minúsculas

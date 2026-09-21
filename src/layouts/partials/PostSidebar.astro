@@ -2,14 +2,19 @@
 import { humanize } from "@/lib/utils/textConverter";
 
 const { tags, categories, allCategories } = Astro.props;
+
+const TAGS_LIMIT = 8;
+const visibleTags = tags.slice(0, TAGS_LIMIT);
+const hasMoreTags = tags.length > TAGS_LIMIT;
 ---
 
 <div class="lg:col-4">
-  <!-- categories -->
-  <div class="mb-8">
-    <h5 class="mb-6">Categorías</h5>
-    <div class="rounded bg-light p-8 dark:bg-darkmode-light">
-      <ul class="space-y-4">
+  <div class="lg:sticky lg:top-24">
+    <!-- categories — hidden on mobile, where CategoryQuickNav already
+         gives immediate access right under the page title -->
+    <div class="mb-6 hidden lg:block">
+      <h5 class="mb-3">Categorías</h5>
+      <ul class="taxonomy-list">
         {
           categories.map((category: any) => {
             const count = allCategories.filter(
@@ -17,11 +22,9 @@ const { tags, categories, allCategories } = Astro.props;
             ).length;
             return (
               <li>
-                <a
-                  class="flex justify-between hover:text-primary dark:hover:text-darkmode-primary"
-                  href={`/categories/${category}`}
-                >
-                  {humanize(category)} <span>({count})</span>
+                <a class="taxonomy-row" href={`/categories/${category}`}>
+                  <span>{humanize(category)}</span>
+                  <span class="taxonomy-count">{count}</span>
                 </a>
               </li>
             );
@@ -29,27 +32,51 @@ const { tags, categories, allCategories } = Astro.props;
         }
       </ul>
     </div>
-  </div>
-  <!-- tags -->
-  <div class="mb-8">
-    <h5 class="mb-6">Etiquetas</h5>
-    <div class="rounded bg-light p-6 dark:bg-darkmode-light">
-      <ul>
+
+    <div class="sidebar-separator hidden lg:block" />
+
+    <!-- tags -->
+    <div>
+      <h5 class="mb-3">Etiquetas</h5>
+      <ul class="tag-chip-list">
         {
-          tags.map((tag: any) => {
-            return (
-              <li class="inline-block">
-                <a
-                  class="m-1 block rounded bg-white px-3 py-1 hover:bg-primary hover:text-white dark:bg-darkmode-body dark:hover:bg-darkmode-primary dark:hover:text-text-dark"
-                  href={`/tags/${tag}`}
-                >
-                  {humanize(tag)}
-                </a>
-              </li>
-            );
-          })
+          visibleTags.map((tag: any) => (
+            <li>
+              <a class="tag-chip" href={`/tags/${tag}`}>
+                {humanize(tag)}
+              </a>
+            </li>
+          ))
         }
       </ul>
+      {
+        hasMoreTags && (
+          <a href="/tags" class="see-all-tags">
+            Ver todos los temas →
+          </a>
+        )
+      }
     </div>
   </div>
 </div>
+
+<style>
+  .sidebar-separator {
+    height: 1px;
+    background: var(--edge);
+    margin: 1.5rem 0;
+  }
+
+  .see-all-tags {
+    display: inline-block;
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .see-all-tags:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -1,131 +1,81 @@
-<h1  align=center>Astro + Tailwind CSS + TypeScript Starter and Boilerplate</h1>
+﻿<div align="center">
 
-<p align=center>Astroplate is a free starter template built with Astro, TailwindCSS & TypeScript, providing everything you need to jumpstart your Astro project and save valuable time.</p>
+<img src="https://avatars.githubusercontent.com/u/26675296?v=4" width="110" style="border-radius:50%" />
 
-<p align=center>Made with ♥ by <a href="https://zeon.studio/">Zeon Studio</a></p>
+# hrist.bartra
 
-<p align=center> If you find this project useful, please give it a ⭐ to show your support. </p>
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=15&pause=1200&color=7C3AED&center=true&vCenter=true&width=520&lines=Senior+Backend+Engineer;Java+%7C+Quarkus+%7C+Spring+Boot+%7C+Angular;Construyendo+con+IA+%2B+SDD;Banco+por+WhatsApp+%40+Indra+%E2%86%92+MiBanco;Si+me+equivoco%2C+no+importa+%F0%9F%9A%80)](https://github.com/Hristb)
 
-<h2 align="center"> <a target="_blank" href="https://astroplate.netlify.app/" rel="nofollow">👀 Demo</a> | <a target="_blank" href="https://astroplate-multilang.netlify.app/" rel="nofollow">👀 Demo Multilang</a> | <a  target="_blank" href="https://pagespeed.web.dev/analysis/https-astroplate-netlify-app/yzx3foum3w?form_factor=desktop">Page Speed (100%)🚀</a>
-</h2>
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hrist-joy-bartra-saavedra-09b71913a/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-7c3aed?style=flat&logo=astro&logoColor=white)](https://hristbartra.dev)
+[![GitHub followers](https://img.shields.io/github/followers/Hristb?style=flat&logo=github&color=181717)](https://github.com/Hristb)
 
-<p align=center>
-  <a href="https://github.com/withastro/astro/releases/tag/astro%404.3.2" alt="Contributors">
-    <img src="https://img.shields.io/static/v1?label=ASTRO&message=4.3&color=000&logo=astro" />
-  </a>
+</div>
 
-  <a href="https://github.com/zeon-studio/astroplate/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/zeon-studio/astroplate" alt="license"></a>
+---
 
-  <img src="https://img.shields.io/github/languages/code-size/zeon-studio/astroplate" alt="code size">
+```javascript
+const hrist = {
+  rol:       "Senior Backend Engineer",
+  empresa:   "Indra  →  MiBanco (Banco por WhatsApp)",
+  estandar:  "BIAN",
 
-  <a href="https://github.com/zeon-studio/astroplate/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/zeon-studio/astroplate" alt="contributors"></a>
-</p>
+  stack:     ["Java 17", "Quarkus", "Spring Boot", "Angular", "Node.js", "Astro"],
+  cloud:     "Azure — Data Factory · Functions · Personalizer",
+  monitor:   "ELK Stack",
 
-## 📌 Key Features
+  meGusta: [
+    "construir proyectos de cualquier tipo — si se me ocurre, lo pruebo",
+    "integrar IA en todo lo que hago",
+    "leer — tecnico y no tecnico",
+  ],
 
-- 👥 Multi-Authors
-- 🌐 Multilingual
-- 🎯 Similar Posts Suggestion
-- 🔍 Search Functionality
-- 🌑 Dark Mode
-- 🏷️ Tags & Categories
-- 🔗 Netlify setting pre-configured
-- 📞 Support contact form
-- 📱 Fully responsive
-- 📝 Write and update content in Markdown / MDX
-- 💬 Disqus Comment
-- 🔳 Syntax Highlighting
-
-### 📄 15+ Pre-designed Pages
-
-- 🏠 Homepage
-- 👤 About
-- 📞 Contact
-- 👥 Authors
-- 👤 Author Single
-- 📝 Blog
-- 📝 Blog Single
-- 🚫 Custom 404
-- 💡 Elements
-- 📄 Privacy Policy
-- 🏷️ Tags
-- 🏷️ Tag Single
-- 🗂️ Categories
-- 🗂️ Category Single
-- 🔍 Search
-
-## 🔗 Integrations
-
-- astro/react
-- astro/sitemap
-- astro/tailwind
-
-## 🚀 Getting Started
-
-### 📦 Dependencies
-
-- astro v5.1+
-- node v20.10+
-- npm v10.2+
-- tailwind v3.4+
-
-### 👉 Install Dependencies
-
-```bash
-npm install
+  filosofia:  "si me equivoco, no importa — aprendo y sigo",
+  ahoramismo: "maximizando mi potencial con GitHub Copilot + SDD",
+};
 ```
 
-### 👉 Development Command
+---
 
-```bash
-npm run dev
+<div align="center">
+
+### Tools & Stack
+
+[![Skills](https://skillicons.dev/icons?i=java,spring,docker,azure,postgres,ts,nodejs,angular,astro,react,git,github)](https://skillicons.dev)
+
+</div>
+
+---
+
+<div align="center">
+
+[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=Hristb&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true)](https://github.com/Hristb)
+&nbsp;
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Hristb&layout=compact&theme=tokyonight&hide_border=true)](https://github.com/Hristb)
+
+</div>
+
+---
+
+### Este repo
+
+Mi portafolio personal — construido con **Astro 5 · React 19 · TypeScript · Tailwind v4**.
+
+```
+portafolio/
+├── Inicio       — presentacion + terminal interactiva
+├── Sobre Mi     — trayectoria, skills, mapa de carrera
+├── Blog         — articulos tecnicos
+├── Cuaderno     — notas diarias (TIL · Libros · Reflexiones)
+└── Contacto     — formulario directo
 ```
 
-### 👉 Build Command
-
 ```bash
-npm run build
+yarn install && yarn dev   # → http://localhost:4321
 ```
 
-### 👉 Build and Run With Docker
+---
 
-```bash
-docker build -t astroplate .
-# or
-# docker --build-arg INSTALLER=npm build -t astroplate .
-# or
-# docker --build-arg INSTALLER=pnpm build -t astroplate .
-
-docker run -p 3000:80 astroplate
-# or
-# docker run --rm -p 3000:80 astroplate
-```
-
-To access the shell within the container:
-
-```bash
-docker run -it --rm astroplate ash
-```
-
-<!-- reporting issue -->
-
-## 🐞 Reporting Issues
-
-We use GitHub Issues as the official bug tracker for this Template. Please Search [existing issues](https://github.com/zeon-studio/astroplate/issues). It’s possible someone has already reported the same problem.
-If your problem or idea has not been addressed yet, feel free to [open a new issue](https://github.com/zeon-studio/astroplate/issues).
-
-<!-- licence -->
-
-## 📝 License
-
-Copyright (c) 2023 - Present, Designed & Developed by [Zeon Studio](https://zeon.studio/)
-
-**Code License:** Released under the [MIT](https://github.comzeon-studio/astroplate/blob/main/LICENSE) license.
-
-**Image license:** The images are only for demonstration purposes. They have their license, we don't have permission to share those images.
-
-## 💻 Need Custom Development Services?
-
-If you need a custom theme, theme customization, or complete website development services from scratch you can [Hire Us](https://zeon.studio/).
+<div align="center">
+<sub>Lima, Peru · 2026</sub>
+</div>

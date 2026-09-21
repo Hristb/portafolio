@@ -11,10 +11,6 @@
     {
       "name": "Artículos",
       "url": "/blog"
-    },
-    {
-      "name": "Contacto",
-      "url": "/contact"
     }
   ],
   "footer": []
